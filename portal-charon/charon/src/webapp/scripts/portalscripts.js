@@ -9,9 +9,9 @@
 
 var dhtml_more_tabs = function() {
 	// first time through set up the DOM
-	jQuery('div#selectNav').appendTo('#linkNav').addClass('dhtml_more_tabs'); // move the selectNav in the DOM
-	jQuery('div#selectNav').css('top',jQuery('#linkNav').height() - 3);       // set its top position
-	jQuery('div#selectNav').width(jQuery('#linkNav').width()*0.75);           // set its width to fix an IE6 bug
+	jQuery('div#selectNav').appendTo('.personalSites').addClass('dhtml_more_tabs'); // move the selectNav in the DOM
+	jQuery('div#selectNav').css('top',jQuery('.personalSites').height() - 3);       // set its top position
+	jQuery('div#selectNav').width(jQuery('.siteNav').width()*0.75);           // set its width to fix an IE6 bug
 	jQuery('#selectNav').css('z-index',9900);                                 // explicitely set the z-index
 	jQuery('.more-tab').css('z-index',9800);                                  //  " for the More Tabs div element
 	

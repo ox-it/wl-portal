@@ -5,31 +5,48 @@
 <!-- START from includeTabs.vm -->
 			<!-- start includeTabs -->
 			<div class="${tabsCssClass}">
-				<div id="siteNav">
-					<div id="linkNav">
+				<div class="siteNav">
+					<div class="linkNav">
 						<a id="sitetabs" class="skip" name="sitetabs"></a>
 							<h1 class="skip">${rloader.sit_worksiteshead}</h1>
-							<ul id="siteLinkList">
-						#foreach ( $site in $tabsSites.tabsSites ) 
-							#if (${site.isCurrentSite})
-								#if (${site.isMyWorkspace})
-							<li class="selectedTab"><a href="#"><span>${rloader.sit_mywor}</span></a></li>
+							<ul class="siteLinkList">
+						#if ($parents)
+							#foreach ( $site in $parents )
+								#if (${site.isCurrentSite})
+								<li class="selectedTab"><a href="#"><span>${site.siteTitle}</span></a></li>
 								#else
-							<li class="selectedTab"><a href="#"><span>${site.siteTitle}</span></a></li>
-								#end
-							#else
-								#if (${site.isMyWorkspace})
-							<li><a href="${site.siteUrl}" title="${rloader.sit_mywor}"><span>${rloader.sit_mywor}</span></a></li>
-								#else
-							<li><a href="${site.siteUrl}" title="${site.siteTitle}"><span>${site.siteTitle}</span></a></li>
+								<li><a href="${site.siteUrl}" title="${site.siteTitle}"><span>${site.siteTitle}</span></a></li>
 								#end
 							#end
+						#else
+								<li><a href="/portal"><span>Site Directory</span></a></li>
 						#end
-						#if ($tabsSites.tabsMoreSitesShow && $useDHTMLMore)
-							<li class="more-tab"><a href="#" onclick="return dhtml_more_tabs();" title="${rloader.sit_more}"><span class="outer"><span class="inner">${rloader.sit_more_tab}</span></span></a></li>
+						#foreach ( $site in $tabsSites.tabsSites )
+							#if (${site.isCurrentSite} && !${site.isMyWorkspace})
+								<li class="selectedTab"><a href="#"><span>${site.siteTitle}</span></a></li>
+							#end
 						#end
 						</ul>
 					</div> <!-- /linkNav -->
+					<div class="linkNav personalSites">
+						<a id="sitetabs" class="skip" name="sitetabs"></a>
+							<h1 class="skip">${rloader.sit_worksiteshead}</h1>
+							<ul class="siteLinkList">
+						#foreach ( $site in $tabsSites.tabsSites )
+							#if (${site.isMyWorkspace}) 
+								#if (${site.isCurrentSite})
+								<li class="selectedTab"><a href="#"><span>${rloader.sit_mywor}</span></a></li>
+								#else
+								<li><a href="${site.siteUrl}" title="${rloader.sit_mywor}"><span>${rloader.sit_mywor}</span></a></li>
+								#end
+							#end
+						#end
+						#if ($useDHTMLMore)
+							<li class="more-tab"><a href="#" onclick="return dhtml_more_tabs();" title="${rloader.sit_more}"><span class="outer"><span class="inner">${rloader.sit_more_tab}</span></span></a></li>
+						#end
+						</ul>
+					</div> <!-- /personalSites -->
+					
 
 					#if ($tabsSites.tabsMoreSitesShow && !$useDHTMLMore)
 					<div id="selectNav">

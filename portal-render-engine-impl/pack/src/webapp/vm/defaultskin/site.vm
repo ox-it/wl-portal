@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
 #parse("/vm/defaultskin/includeStandardHead.vm")
 <body class="portalBody">
 #if ( $pageTop )
@@ -36,10 +37,18 @@
 			<div id="siteNavWrapper" class="${logoSiteClass}">
 				<div id="mastHead">
 					<div id="mastLogo">
+					#if (${logoLink})
+						<a href="${logoLink}"><img title="Logo" alt="Logo" src="${logoSkinRepo}/${logoSkin}/images/logo_inst.gif" /></a>
+					#else
 						<img title="Logo" alt="Logo" src="${logoSkinRepo}/${logoSkin}/images/logo_inst.gif" />
+					#end
 					</div>
 					<div id="mastBanner">
+					#if (${bannerLink})
+						<a href="${bannerLink}"><img title="Banner" alt="Banner" src="${logoSkinRepo}/${logoSkin}/images/banner_inst.gif" /></a>
+					#else
 						<img title="Banner" alt="Banner" src="${logoSkinRepo}/${logoSkin}/images/banner_inst.gif" />
+					#end
 					</div>
 					<!-- login component -->
 					<div id="mastLogin">
@@ -136,5 +145,6 @@
 </div>
 <!-- end includeSiteNav -->
 <!-- end site.vm -->
+
 	</body>
 </html>

@@ -4,7 +4,7 @@
   <parent>
     <artifactId>portal-base</artifactId>
     <groupId>org.sakaiproject</groupId>
-    <version>SNAPSHOT</version>
+    <version>M2</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
   <name>sakai-portal-render-engine-impl</name>
@@ -123,12 +123,6 @@
         <directory>${basedir}/src/test/</directory>
         <includes>
           <include>**/*</include>
-        </includes>
-      </testResource>
-      <testResource>
-        <directory>${basedir}/../pack/src/webapp/</directory>
-        <includes>
-          <include>**/*.*</include>
         </includes>
       </testResource>
     </testResources>
