@@ -412,7 +412,6 @@ public class SiteHandler extends WorksiteHandler
 			boolean loggedIn = session.getUserId() != null;
 			boolean topLogin = ServerConfigurationService.getBoolean("top.login", true);
 
-
 			String accessibilityURL = ServerConfigurationService
 					.getString("accessibility.url");
 			rcontext.put("siteNavHasAccessibilityURL", Boolean
@@ -470,6 +469,11 @@ public class SiteHandler extends WorksiteHandler
 			String cssClass = (siteType != null) ? siteType : "undeterminedSiteType";
 			rcontext.put("logoSiteType", siteType);
 			rcontext.put("logoSiteClass", cssClass);
+
+			String bannerLink = ServerConfigurationService.getString("banner.link", null);
+			String logoLink = ServerConfigurationService.getString("logo.link", null);
+			rcontext.put("bannerLink", bannerLink);
+			rcontext.put("logoLink", logoLink);
 			portal.includeLogin(rcontext, req, session);
 		}
 	}
@@ -671,17 +675,6 @@ public class SiteHandler extends WorksiteHandler
 			}
 
 			rcontext.put("tabsCssClass", cssClass);
-
-			rcontext.put("tabsAddLogout", Boolean.valueOf(addLogout));
-			if (addLogout)
-			{
-				String logoutUrl = Web.serverUrl(req)
-						+ ServerConfigurationService.getString("portalPath")
-						+ "/logout_gallery";
-				rcontext.put("tabsLogoutUrl", logoutUrl);
-				// rcontext.put("tabsSitLog",
-				// Web.escapeHtml(rb.getString("sit_log")));
-			}
 		}
 	}
 	/**
