@@ -47,9 +47,9 @@ import org.sakaiproject.tool.api.ToolException;
  */
 public class WorksiteHandler extends PageHandler
 {
-	private static final String INCLUDE_WORKSITE = "include-worksite";
+	protected static final String INCLUDE_WORKSITE = "include-worksite";
 
-	private static final String INCLUDE_PAGE_NAV = "include-page-nav";
+	protected static final String INCLUDE_PAGE_NAV = "include-page-nav";
 
 	private static final String URL_FRAGMENT = "worksite";
 

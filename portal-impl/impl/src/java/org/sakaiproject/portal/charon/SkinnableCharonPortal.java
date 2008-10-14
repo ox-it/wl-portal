@@ -614,8 +614,9 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 		boolean showResetButton = !"false".equals(placement.getConfig().getProperty(
 				Portal.TOOLCONFIG_SHOW_RESET_BUTTON));
 
-		String resetActionUrl = PortalStringUtil.replaceFirst(toolUrl, "/tool/",
-				"/tool-reset/")
+		String toolUrlPrefix = ServerConfigurationService.getToolUrl();
+		String resetActionUrl = PortalStringUtil.replaceFirst(toolUrl, toolUrlPrefix,
+				toolUrlPrefix+ "-reset")
 				+ "?panel=Main";
 
 		// Reset is different for Portlets

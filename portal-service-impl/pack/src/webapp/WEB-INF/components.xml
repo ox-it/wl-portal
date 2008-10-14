@@ -23,7 +23,7 @@
 			 class="org.sakaiproject.portal.service.LocalizedPageToolProperties"
 			 singleton="true"/>
     
-    <bean id="org.sakaiproject.portal.api.SiteNeighbourhoodService"
+    <bean id="org.sakaiproject.portal.service.SiteNeighbourhoodServiceImpl"
           class="org.sakaiproject.portal.service.SiteNeighbourhoodServiceImpl"
           singleton="true"
           init-method="init"

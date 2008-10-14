@@ -1066,7 +1066,11 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 	 * @param alias
 	 * @return
 	 */
+<<<<<<< HEAD:portal-impl/impl/src/java/org/sakaiproject/portal/charon/site/PortalSiteHelperImpl.java
 	private String parseAlias(String aliasId, String siteId)
+=======
+	public String parseAlias(String aliasId, Site site)
+>>>>>>> WL-7:portal-impl/impl/src/java/org/sakaiproject/portal/charon/site/PortalSiteHelperImpl.java
 	{
 		String prefix = PAGE_ALIAS+ siteId+ Entity.SEPARATOR;
 		String alias = null;

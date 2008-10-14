@@ -78,6 +78,8 @@ public abstract class AbstractSiteViewImpl implements SiteView
 
 	protected boolean expandSite = false;
 
+	protected Site myWorkspaceSite;
+
 	public AbstractSiteViewImpl(PortalSiteHelperImpl siteHelper, SiteNeighbourhoodService siteNeighbourhoodService, 
 			HttpServletRequest request, Session session, String currentSiteId, SiteService siteService,
 			ServerConfigurationService serverConfigurationService, PreferencesService preferencesService)
@@ -96,7 +98,7 @@ public abstract class AbstractSiteViewImpl implements SiteView
 		
 		
 		loggedIn = session.getUserId() != null;
-		Site myWorkspaceSite = siteHelper.getMyWorkspace(session);
+		myWorkspaceSite = siteHelper.getMyWorkspace(session);
 		if (myWorkspaceSite != null)
 		{
 			myWorkspaceSiteId = myWorkspaceSite.getId();
