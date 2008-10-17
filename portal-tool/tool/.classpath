@@ -1,0 +1,24 @@
+<classpath>
+  <classpathentry kind="src" path="src/java"/>
+  <classpathentry kind="output" path="m2-target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/buckett/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar" sourcepath="M2_REPO/junit/junit/3.8.1/junit-3.8.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-component-api/M2/sakai-component-api-M2.jar" sourcepath="M2_REPO/org/sakaiproject/sakai-component-api/M2/sakai-component-api-M2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/buckett/.m2/repository/org/sakaiproject/sakai-component-api/M2/sakai-component-api-M2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="src" path="/sakai-portal-util"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-site-api/M2/sakai-site-api-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-tool-api/M2/sakai-tool-api-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-tool-servlet/M2/sakai-tool-servlet-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-tool-util/M2/sakai-tool-util-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-util/M2/sakai-util-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-util-api/M2/sakai-util-api-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar" sourcepath="M2_REPO/javax/servlet/servlet-api/2.4/servlet-api-2.4-sources.jar"/>
+</classpath>

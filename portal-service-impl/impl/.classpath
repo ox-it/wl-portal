@@ -1,0 +1,39 @@
+<classpath>
+  <classpathentry kind="src" path="src/java"/>
+  <classpathentry kind="output" path="m2-target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/castor/castor/1.0/castor-1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/buckett/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar" sourcepath="M2_REPO/junit/junit/3.8.1/junit-3.8.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/pluto/pluto-container/1.1.2/pluto-container-1.1.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/pluto/pluto-descriptor-api/1.1.2/pluto-descriptor-api-1.1.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/pluto/pluto-descriptor-impl/1.1.2/pluto-descriptor-impl-1.1.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/portlet/portlet-api/1.0/portlet-api-1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-alias-api/M2/sakai-alias-api-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-authz-api/M2/sakai-authz-api-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-component/M2/sakai-component-M2.jar" sourcepath="M2_REPO/org/sakaiproject/sakai-component/M2/sakai-component-M2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/buckett/.m2/repository/org/sakaiproject/sakai-component/M2/sakai-component-M2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-component-api/M2/sakai-component-api-M2.jar" sourcepath="M2_REPO/org/sakaiproject/sakai-component-api/M2/sakai-component-api-M2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/buckett/.m2/repository/org/sakaiproject/sakai-component-api/M2/sakai-component-api-M2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-entity-api/M2/sakai-entity-api-M2.jar"/>
+  <classpathentry kind="src" path="/sakai-portal-api"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-site-api/M2/sakai-site-api-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-tool-api/M2/sakai-tool-api-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-user-api/M2/sakai-user-api-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-util/M2/sakai-util-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sakaiproject/sakai-util-api/M2/sakai-util-api-M2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar" sourcepath="M2_REPO/javax/servlet/servlet-api/2.4/servlet-api-2.4-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/xerces/xercesImpl/2.6.2/xercesImpl-2.6.2.jar" sourcepath="M2_REPO/xerces/xercesImpl/2.6.2/xercesImpl-2.6.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/xerces/xmlParserAPIs/2.6.2/xmlParserAPIs-2.6.2.jar"/>
+</classpath>
