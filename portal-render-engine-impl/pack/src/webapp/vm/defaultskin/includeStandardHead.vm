@@ -78,5 +78,9 @@ ${sakai_html_head_css}
 	</script>
     #end
 #end
+
+#if ( ${localCSS} )
+	<link href="${pageSkinRepo}/${localCSS}" type="text/css" rel="stylesheet" media="all" />
+#end
 </head>
 <!-- END from includeStandardHead.vm -->
