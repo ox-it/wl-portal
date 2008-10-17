@@ -12,6 +12,7 @@
     <link href="/portal/styles/portalstyles-ie5.css" type="text/css" rel="stylesheet" media="all" />
 <![endif]><![endif]-->
 
+
     <meta http-equiv="Content-Style-Type" content="text/css" />
 #if (! $currentPlacement && $isPDA )
     <meta name="viewport" content="width=320, user-scalable=no" />
@@ -65,6 +66,10 @@ ${tool.toolRenderResult.getTitle()}
 	${styleableJS} 
 	</script>
     #end
+#end
+
+#if ( ${localCSS} )
+	<link href="${pageSkinRepo}/${localCSS}" type="text/css" rel="stylesheet" media="all" />
 #end
 <!--
 
