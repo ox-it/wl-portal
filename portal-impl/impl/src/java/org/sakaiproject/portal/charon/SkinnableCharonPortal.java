@@ -966,7 +966,7 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 			skin = ServerConfigurationService.getString("skin.default");
 		}
 		String skinRepo = ServerConfigurationService.getString("skin.repo");
-		String localCSS = ServerConfigurationService.getString("local.css");
+		String localCSS = ServerConfigurationService.getString("local.css", null);
 
 		rcontext.put("pageSkinRepo", skinRepo);
 		rcontext.put("pageSkin", skin);
