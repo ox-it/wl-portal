@@ -88,6 +88,8 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 	protected final static String CURRENT_PLACEMENT = "sakai:ToolComponent:current.placement";
 
 	private Portal portal;
+	
+	private boolean lookForPageAliases;
 
 	// 2.3 back port
 	// private final String PROP_PARENT_ID = "sakai:parent-id";
@@ -97,9 +99,10 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 	/**
 	 * @param portal
 	 */
-	public PortalSiteHelperImpl(Portal portal)
+	public PortalSiteHelperImpl(Portal portal, boolean lookForPageAliases)
 	{
 		this.portal = portal;
+		this.lookForPageAliases = lookForPageAliases;
 	}
 
 	/* (non-Javadoc)
@@ -934,6 +937,11 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 
 	public SitePage lookupAliasToPage(String alias, Site site)
 	{
+		//Shortcut if we aren't using page aliases.
+		if (!lookForPageAliases)
+		{
+			return null;
+		}
 		SitePage page = null;
 		if (alias != null && alias.length() > 0)
 		{
@@ -957,6 +965,11 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 
 	public String lookupPageToAlias(Site site, SitePage page)
 	{
+		// Shortcut if we aren't using page aliases.
+		if (!lookForPageAliases)
+		{
+			return null;
+		}
 		String alias = null;
 		List<Alias> aliases = AliasService.getAliases(page.getReference());
 		if (aliases.size() > 0)
