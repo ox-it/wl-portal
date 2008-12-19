@@ -122,28 +122,6 @@ public class MoreSiteViewImpl extends DefaultSiteViewImpl
 				termsToSites.put(term, currentList);
 			}
 
-			class TitleSorter implements Comparator<Map>
-			{
-
-				public int compare(Map first, Map second)
-				{
-
-					if (first == null || second == null) return 0;
-
-					String firstTitle = (String) first.get("siteTitle");
-					String secondTitle = (String) second.get("siteTitle");
-
-					if (firstTitle != null)
-						return firstTitle.compareToIgnoreCase(secondTitle);
-
-					return 0;
-
-				}
-
-			}
-
-			Comparator<Map> titleSorter = new TitleSorter();
-
 			// now loop through each section and convert the Lists to maps
 			for (String key : termsToSites.keySet())
 			{
@@ -154,8 +132,6 @@ public class MoreSiteViewImpl extends DefaultSiteViewImpl
 						/* resetTools */"true".equals(serverConfigurationService
 								.getString(Portal.CONFIG_AUTO_RESET)),
 						/* doPages */true, /* toolContextPath */null, loggedIn);
-
-				Collections.sort(temp, titleSorter);
 
 				tabsMoreTerms.put(key, temp);
 
