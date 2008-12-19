@@ -1085,11 +1085,11 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 	public Comparator<Alias> getAliasComparator()
 	{
 		return new Comparator<Alias>() {
-			public int compare(Alias o1, Alias o2)
+			public int compare(Alias alias, Alias otherAlias)
 			{
 				// Sort by date, then by ID to assure consistent order.
-				return o1.getCreatedTime().compareTo(o2.getCreatedTime()) * 10 +
-					o1.getId().compareTo(o2.getId());
+				return otherAlias.getCreatedTime().compareTo(alias.getCreatedTime()) * 10 +
+					Integer.signum(alias.getId().compareTo(otherAlias.getId()));
 			}
 			
 		};
