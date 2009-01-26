@@ -20,7 +20,7 @@
 									<div class="title">
 						#if (${tool.toolShowResetButton})
 						                <a href="${tool.toolResetActionUrl}" target="${tool.toolPlacementIDJS}" title="${rloader.sit_reset}">
-						                        <img src="/library/image/transparent.gif" alt="${rloader.sit_reset}" border="1" /></a>
+						                        <img src="/library/image/transparent.gif" alt="${rloader.sit_reset_alt}" border="1" /></a>
 						#end
 										<h2>${tool.toolRenderResult.getTitle()}</h2>
 									</div>
@@ -100,7 +100,7 @@
 									<div class="title">
 						#if (${tool.toolShowResetButton})
 						                <a href="${tool.toolResetActionUrl}" target="${tool.toolPlacementIDJS}" title="${rloader.sit_reset}">
-						                        <img src="/library/image/transparent.gif" alt="${rloader.sit_reset}" border="1" /></a>
+						                        <img src="/library/image/transparent.gif" alt="${rloader.sit_reset_alt}" border="1" /></a>
 						#end
 										<h2>${tool.toolRenderResult.getTitle()}</h2>
 									</div>
