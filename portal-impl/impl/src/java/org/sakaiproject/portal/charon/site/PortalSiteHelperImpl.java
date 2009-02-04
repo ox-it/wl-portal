@@ -1051,7 +1051,9 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		{	
 			if (aliases.size() > 1 && log.isWarnEnabled())
 			{
-				log.warn("More than one alias for: "+siteId+ ":"+ page.getId());
+				if (log.isDebugEnabled()) {
+					log.debug("More than one alias for: "+siteId+ ":"+ page.getId());
+				}
 				// Sort on ID so it is consistent in the alias it uses.
 				Collections.sort(aliases, getAliasComparator());
 			}
