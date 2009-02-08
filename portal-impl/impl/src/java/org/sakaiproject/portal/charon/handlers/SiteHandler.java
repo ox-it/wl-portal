@@ -640,7 +640,7 @@ public class SiteHandler extends WorksiteHandler
 				}
 			}
 
-			rcontext.put("useDHTMLMore", useDHTMLMore);
+			rcontext.put("useDHTMLMore", useDHTMLMore && loggedIn);
 			if (useDHTMLMore)
 			{
 				SiteView siteView = portal.getSiteHelper().getSitesView(
