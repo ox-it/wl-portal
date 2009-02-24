@@ -31,6 +31,9 @@
 			<a href="#sitetabs" class="skip" title="${rloader.sit_jumpworksite}" accesskey="w">
 				${rloader.sit_jumpworksite}
 			</a>
+			<a href="#tosubsitemenu" class="skip" title="${rloader.sit_jumpsubsites}">
+				${rloader.sit_jumpsubsites}
+			</a>
 		</div>
 		#if (${tabsSites} )
 		<div id="headerMax">

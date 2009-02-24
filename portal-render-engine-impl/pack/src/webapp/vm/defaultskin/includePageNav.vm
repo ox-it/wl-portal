@@ -47,6 +47,8 @@
 			#end
 					</ul>
 				</div>
+				<a id="tosubsitemenu" class="skip" name="tosubsitemenu"></a>
+				<h1 class="skip">${rloader.sit_subsiteshead}</h1>
 				<div class="toolMenu subSites">
 					<ul>
 			<!-- Add subsite lists --> 
