@@ -34,6 +34,9 @@
 			<a href="#tosubsitemenu" class="skip" title="${rloader.sit_jumpsubsites}">
 				${rloader.sit_jumpsubsites}
 			</a>
+			<a href="#tohierarchypages" class="skip" title="${rloader.sit_jumphierarchypages}">
+				${rloader.sit_jumphierarchypages}
+			</a>
 		</div>
 		#if (${tabsSites} )
 		<div id="headerMax">
