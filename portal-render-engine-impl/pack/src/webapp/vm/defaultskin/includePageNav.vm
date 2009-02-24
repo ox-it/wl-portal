@@ -63,6 +63,7 @@
 					</ul>
 				</div>
 				#end
+				#if ($hierarchyPages.pageNavTools.size() > 0)
 				<a id="tohierarchypages" class="skip" name="tohierarchypages"></a>
 				<h1 class="skip">${rloader.sit_hierarchypageshead}</h1>
 				<div class="toolMenu hierarchyPages">
@@ -89,7 +90,7 @@
 			#end
 					</ul>
 				</div>
-				
+				#end
 
 			#if (${sitePages.pageNavShowPresenceLoggedIn})
 				<div id="presenceWrapper">
