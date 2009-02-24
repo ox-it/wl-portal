@@ -47,6 +47,7 @@
 			#end
 					</ul>
 				</div>
+				#if ($children.size() > 0)
 				<a id="tosubsitemenu" class="skip" name="tosubsitemenu"></a>
 				<h1 class="skip">${rloader.sit_subsiteshead}</h1>
 				<div class="toolMenu subSites">
@@ -61,6 +62,7 @@
 			#end
 					</ul>
 				</div>
+				#end
 				<a id="tohierarchypages" class="skip" name="tohierarchypages"></a>
 				<h1 class="skip">${rloader.sit_hierarchypageshead}</h1>
 				<div class="toolMenu hierarchyPages">
