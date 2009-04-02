@@ -1368,7 +1368,13 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 					ServerConfigurationService.getString("top.login"));
 			boolean containerLogin = Boolean.TRUE.toString().equalsIgnoreCase(
 					ServerConfigurationService.getString("container.login"));
+			// Should we keep the path after Login?
+			boolean keepPath = ServerConfigurationService.getBoolean("login.keep.path", false);
+			String returnPath = (keepPath)?"?returnPath="+ req.getPathInfo():"";
+			
 			if (containerLogin) topLogin = false;
+			
+
 
 			// if not logged in they get login
 			if (session.getUserId() == null)
@@ -1384,6 +1390,8 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 							.trimToNull(ServerConfigurationService.getString("login.url"));
 					if (overrideLoginUrl != null) logInOutUrl = overrideLoginUrl;
 
+					logInOutUrl = logInOutUrl + returnPath;
+					
 					// check for a login text override
 					message = StringUtil.trimToNull(ServerConfigurationService
 							.getString("login.text"));
@@ -1402,8 +1410,7 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 								.getString("xlogin.text"));
 						image2 = StringUtil.trimToNull(ServerConfigurationService
 								.getString("xlogin.icon"));
-						logInOutUrl2 = ServerConfigurationService.getString("portalPath")
-								+ "/xlogin";
+						logInOutUrl2 = ServerConfigurationService.getString("portalPath") + "/xlogin" + returnPath;
 					}
 				}
 			}
@@ -1428,6 +1435,7 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 			}
 			rcontext.put("loginTopLogin", Boolean.valueOf(topLogin));
 
+			
 			if (!topLogin)
 			{
 
@@ -1463,10 +1471,9 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 				rcontext.put("loginEidWording", eidWording);
 				rcontext.put("loginPwWording", pwWording);
 				rcontext.put("loginWording", loginWording);
-
-				// setup for the redirect after login
-				session.setAttribute(Tool.HELPER_DONE_URL, ServerConfigurationService
-						.getPortalUrl());
+				if (keepPath) {
+					rcontext.put("returnPath", req.getPathInfo());
+				}
 			}
 		}
 	}
