@@ -110,7 +110,7 @@ public class GalleryHandler extends SiteHandler
 				if (forceLogin == null || "yes".equalsIgnoreCase(forceLogin)
 						|| "true".equalsIgnoreCase(forceLogin))
 				{
-					portal.doLogin(req, res, session, req.getPathInfo(), false);
+					portal.doLogin(req, res, session, req.getPathInfo(), Portal.LoginRoute.NONE);
 					return;
 				}
 				siteId = ServerConfigurationService.getGatewaySiteId();
