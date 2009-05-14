@@ -104,6 +104,7 @@ import org.sakaiproject.tool.api.ToolURL;
 import org.sakaiproject.tool.cover.ActiveToolManager;
 import org.sakaiproject.tool.cover.SessionManager;
 import org.sakaiproject.tool.cover.ToolManager;
+import org.sakaiproject.user.api.User;
 import org.sakaiproject.user.api.UserNotDefinedException;
 import org.sakaiproject.user.cover.UserDirectoryService;
 import org.sakaiproject.util.BasicAuth;
@@ -1375,6 +1376,12 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 			String message2 = null;
 			String image2 = null;
 
+			// for showing user display name and id next to logout (SAK-10492)
+			String loginUserDispName = null;
+			String loginUserDispId = null;
+			boolean displayUserloginInfo = ServerConfigurationService.
+					getBoolean("display.userlogin.info", false);
+
 			// check for the top.login (where the login fields are present
 			// instead
 			// of a login link, but ignore it if container.login is set
@@ -1435,6 +1442,14 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 				logInOutUrl += ServerConfigurationService.getString("portalPath")
 						+ "/logout";
 
+				// get current user display id and name
+				if (displayUserloginInfo)
+				{
+					User thisUser = UserDirectoryService.getCurrentUser();
+					loginUserDispId = thisUser.getDisplayId();
+					loginUserDispName = thisUser.getDisplayName();
+				}
+
 				// check for a logout text override
 				message = StringUtil.trimToNull(ServerConfigurationService
 						.getString("logout.text"));
@@ -1489,6 +1504,13 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 					rcontext.put("returnPath", req.getPathInfo());
 				}
 			}
+
+			if (displayUserloginInfo)
+			{
+				rcontext.put("loginUserDispName", loginUserDispName);
+				rcontext.put("loginUserDispId", loginUserDispId);
+			}
+			rcontext.put("displayUserloginInfo", displayUserloginInfo && loginUserDispId != null);
 		}
 	}
 

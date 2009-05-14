@@ -60,6 +60,9 @@
 					<div id="mastLogin">
 					#if (!${loginTopLogin})
 						<div id="loginLinks">
+ 						#if (${displayUserloginInfo})
+ 							<span id="loginUser">${loginUserDispName} (${loginUserDispId}) | </span>
+ 						#end
 						#if (${loginHasImage1}) 
 							<a href="${loginLogInOutUrl}" title="${loginMessage}" id="loginLink1" ><img src="${loginImage1}" alt="${loginMessage}"/></a>
 						#else
@@ -113,6 +116,9 @@
 					<div id="mastLogin">
 					#if (!${loginTopLogin})
 						<div id="loginLinks">
+					#if (${displayUserloginInfo})
+							<span id="loginUser">${loginUserDispName} (${loginUserDispId}) | </span>
+					#end						
 					#if (${loginHasImage1}) 
 							<a href="${loginLogInOutUrl}" title="${loginMessage}" id="loginLink1" ><img src="${loginImage1}" alt="${loginMessage}"/></a>
 					#else
