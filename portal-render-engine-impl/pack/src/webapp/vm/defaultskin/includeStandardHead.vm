@@ -5,6 +5,7 @@
 <!-- START from includeStandardHead.vm -->
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="shortcut icon" href="/favicon.ico">
     <link href="${pageSkinRepo}/${pageSkin}/portal.css" type="text/css" rel="stylesheet" media="all" />
 <!-- this caises problems for layout nneds investihating -->
     <link href="/portal/styles/portalstyles.css" type="text/css" rel="stylesheet" media="all" />
