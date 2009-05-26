@@ -13,7 +13,7 @@
 						#if ($parents)
 							#foreach ( $site in $parents )
 								#if (${site.isCurrentSite})
-								<li class="selectedTab"><a href="#"><span>${site.siteTitle}</span></a></li>
+								<li class="selectedTab"><a href="${site.siteUrl}"><span>${site.siteTitle}</span></a></li>
 								#else
 								<li><a href="${site.siteUrl}" title="${site.siteTitle}"><span>${site.siteTitle}</span></a></li>
 								#end
@@ -23,7 +23,7 @@
 						#end
 						#foreach ( $site in $tabsSites.tabsSites )
 							#if (${site.isCurrentSite} && !${site.isMyWorkspace})
-								<li class="selectedTab"><a href="#"><span>${site.siteTitle}</span></a></li>
+								<li class="selectedTab"><a href="${site.siteUrl}"><span>${site.siteTitle}</span></a></li>
 							#end
 						#end
 						</ul>
@@ -35,7 +35,7 @@
 						#foreach ( $site in $tabsSites.tabsSites )
 							#if (${site.isMyWorkspace}) 
 								#if (${site.isCurrentSite})
-								<li class="selectedTab"><a href="#"><span>${rloader.sit_mywor}</span></a></li>
+								<li class="selectedTab"><a href="${site.siteUrl}"><span>${rloader.sit_mywor}</span></a></li>
 								#else
 								<li><a href="${site.siteUrl}" title="${rloader.sit_mywor}"><span>${rloader.sit_mywor}</span></a></li>
 								#end
