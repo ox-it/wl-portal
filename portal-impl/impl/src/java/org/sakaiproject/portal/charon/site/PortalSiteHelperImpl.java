@@ -516,10 +516,24 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 			// one tool on the page
 			List pTools = p.getTools();
 			ToolConfiguration firstTool = null;
+			boolean hidden = false;
 			if (pTools != null && pTools.size() > 0)
 			{
 				firstTool = (ToolConfiguration) pTools.get(0);
+				for (ToolConfiguration toolConfig: (List<ToolConfiguration>) pTools)
+				{
+					if (isHidden(toolConfig))
+					{
+						hidden = true;
+					}
+					else
+					{
+						hidden = false;
+						break;
+					}
+				}
 			}
+
 			String toolsOnPage = null;
 
 			boolean current = (page != null && p.getId().equals(page.getId()) && !p
@@ -539,6 +553,7 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 				m.put("pageId", Web.escapeUrl(p.getId()));
 				m.put("jsPageId", Web.escapeJavascript(p.getId()));
 				m.put("pageRefUrl", pagerefUrl);
+				m.put("hidden", Boolean.valueOf(hidden));
 
 				Iterator tools = pTools.iterator();
 				//get the tool descriptions for this page, typically only one per page, execpt for the Home page
@@ -1115,6 +1130,10 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		return toolHelper.allowTool(site, placement);
 	}
 
+	public boolean isHidden(Placement placement)
+	{
+		return toolHelper.isHidden(placement);
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

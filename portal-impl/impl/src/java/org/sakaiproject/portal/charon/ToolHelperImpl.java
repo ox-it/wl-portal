@@ -28,6 +28,7 @@ import org.apache.commons.logging.LogFactory;
 import org.sakaiproject.authz.cover.SecurityService;
 import org.sakaiproject.site.api.Site;
 import org.sakaiproject.tool.api.Placement;
+import org.sakaiproject.util.StringUtil;
 
 /**
  * @author ieb
@@ -87,4 +88,17 @@ public class ToolHelperImpl
 		return false;
 	}
 
+	/**
+	 * Check if the placement is hidden.
+	 * @param placement
+	 * @return
+	 */
+	public boolean isHidden(Placement placement)
+	{
+		if (placement == null) return true;
+		String requiredPermissionsString = StringUtil.trimToNull(placement.getConfig().getProperty(TOOLCONFIG_REQUIRED_PERMISSIONS));
+		if (requiredPermissionsString == null)
+			return false;
+		return requiredPermissionsString.contains("site.upd");
+	}
 }
