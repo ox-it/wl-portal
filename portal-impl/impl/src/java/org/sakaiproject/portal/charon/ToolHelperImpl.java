@@ -29,6 +29,7 @@ import org.apache.commons.logging.LogFactory;
 import org.sakaiproject.authz.cover.SecurityService;
 import org.sakaiproject.site.api.Site;
 import org.sakaiproject.tool.api.Placement;
+import org.sakaiproject.util.StringUtil;
 
 /**
  * @author ieb
@@ -60,12 +61,8 @@ public class ToolHelperImpl
 		// No way to render an opinion
 		if (placement == null || site == null) return true;
 
-		String requiredPermissionsString = placement.getConfig().getProperty(TOOLCONFIG_REQUIRED_PERMISSIONS);
-		if (log.isDebugEnabled()) log.debug("requiredPermissionsString=" + requiredPermissionsString + " for " + placement.getToolId());
+		String requiredPermissionsString = StringUtil.trimToNull(placement.getConfig().getProperty(TOOLCONFIG_REQUIRED_PERMISSIONS));
 		if (requiredPermissionsString == null)
-			return true;
-		requiredPermissionsString = requiredPermissionsString.trim();
-		if (requiredPermissionsString.length() == 0)
 			return true;
 
 		String[] allowedPermissionSets = requiredPermissionsString.split("\\|");
