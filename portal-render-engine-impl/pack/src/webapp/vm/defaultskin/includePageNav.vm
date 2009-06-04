@@ -2,6 +2,7 @@
 		<!-- start includePageNav -->
 			<div class="divColor" id="toolMenuWrap">
 				<div id="worksiteLogo">
+				<!-- Make it collapse in IE-->
 			#if (!${sitePages.pageNavPublished})
 					<p id="siteStatus">unpublished site</p>
 			#end
