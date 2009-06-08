@@ -49,9 +49,10 @@
 					</ul>
 				</div>
 				#if ($children.size() > 0)
-				<a id="tosubsitemenu" class="skip" name="tosubsitemenu"></a>
-				<h1 class="skip">${rloader.sit_subsiteshead}</h1>
 				<div class="toolMenu subSites">
+				
+				<a id="tosubsitemenu" class="skip" name="tosubsitemenu"></a>
+				<h1>${rloader.sit_subsiteshead}</h1>
 					<ul>
 			<!-- Add subsite lists --> 
 			#foreach ( $site in $children ) 
