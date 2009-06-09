@@ -15,7 +15,7 @@
 								#if (${site.isCurrentSite})
 								<li class="selectedTab"><a href="${site.siteUrl}"><span>${site.siteTitle}</span></a></li>
 								#else
-								<li><a href="${site.siteUrl}" title="${site.siteTitle}"><span>${site.siteTitle}</span></a></li>
+								<li><a href="${site.siteUrl}" title="${site.shortDescription}"><span>${site.siteTitle}</span></a></li>
 								#end
 							#end
 						#else

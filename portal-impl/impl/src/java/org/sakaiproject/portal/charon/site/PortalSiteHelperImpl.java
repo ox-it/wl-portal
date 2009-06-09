@@ -334,7 +334,10 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 				&& (s.getId().equals(myWorkspaceSiteId) || effectiveSite
 						.equals(myWorkspaceSiteId))));
 		m.put("siteTitle", Web.escapeHtml(s.getTitle()));
+		// TODO Description contains HTML now so is this sensible?
 		m.put("siteDescription", Web.escapeHtml(s.getDescription()));
+		// Short description shouldn't have HTML so should be fine.
+		m.put("shortDescription", Web.escapeHtml(s.getShortDescription()));
 		String siteUrl = Web.serverUrl(req)
 				+ ServerConfigurationService.getString("portalPath") + "/";
 		if (prefix != null) siteUrl = siteUrl + prefix + "/";
