@@ -121,6 +121,8 @@ public interface PortalSiteHelper
 	public SitePage lookupAliasToPage(String alias, Site site);
 
 	public String lookupPageToAlias(Site site, SitePage page);
+	
+	public String getSiteAlias(String siteId);
 
 
 
