@@ -1151,5 +1151,9 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		return null;
 	}
 
+	public String getSiteAlias(String siteId) {
+		return SiteService.getInstance().lookupSiteAlias(siteId);
+	}
+
 
 }
