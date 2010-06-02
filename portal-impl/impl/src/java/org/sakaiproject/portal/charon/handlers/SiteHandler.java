@@ -36,6 +36,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.sakaiproject.authz.api.Role;
 import org.sakaiproject.authz.api.SecurityAdvisor;
+import org.sakaiproject.authz.cover.AuthzGroupService;
 import org.sakaiproject.authz.cover.SecurityService;
 import org.sakaiproject.component.cover.ServerConfigurationService;
 import org.sakaiproject.entity.api.ResourceProperties;
@@ -147,9 +148,10 @@ public class SiteHandler extends WorksiteHandler
 		boolean doFrameSuppress = "true".equals(req.getParameter("sakai.frame.suppress"));
 
 		// default site if not set
+		String userId = session.getUserId();
 		if (siteId == null)
 		{
-			if (session.getUserId() == null)
+			if (userId == null)
 			{
 				siteId = portal.getSiteHelper().getGatewaySiteId();
 				if (siteId == null)
@@ -160,7 +162,7 @@ public class SiteHandler extends WorksiteHandler
 			else
 			{
 				// TODO Should maybe switch to portal.getSiteHelper().getMyWorkspace()
-				siteId = SiteService.getUserSiteId(session.getUserId());
+				siteId = SiteService.getUserSiteId(userId);
 			}
 		}
 
@@ -206,12 +208,19 @@ public class SiteHandler extends WorksiteHandler
 		}
 		catch (PermissionException e)
 		{
+			if (ServerConfigurationService.getBoolean("portal.redirectJoin", true) &&
+					userId != null && portal.getSiteHelper().isJoinable(siteId, userId))
+			{
+				String redirectUrl = Web.returnUrl(req, "/join/"+siteId);
+				res.sendRedirect(redirectUrl);
+				return;
+			}
 		}
 
 		if (site == null)
 		{				
 			// if not logged in, give them a chance
-			if (session.getUserId() == null)
+			if (userId == null)
 			{
 				StoredState ss = portalService.newStoredState("directtool", "tool");
 				ss.setRequest(req);
