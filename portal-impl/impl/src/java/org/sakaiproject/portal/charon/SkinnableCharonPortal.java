@@ -863,17 +863,14 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 
 		ActiveTool tool = ActiveToolManager.getActiveTool("sakai.login");
  
-		String context = req.getContextPath() + req.getServletPath(); 
+		String context = req.getContextPath() + req.getServletPath() + "/relogin"; 
 		String loginPath = "";
 		if (forceContainer || LoginRoute.CONTAINER.equals(route)) {
 			loginPath = "/relogin";
-			context += "/relogin";
 		} else if (LoginRoute.SAKAI.equals(route)) {
 			loginPath = "/xlogin";
-			context += "/relogin";
 		} else {
 			loginPath = "/login";
-			context += "/relogin";
 		}
 		
 		tool.help(req, res, context, loginPath);
