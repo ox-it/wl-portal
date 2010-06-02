@@ -481,8 +481,30 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		}
 
 		String pagePopupUrl = Web.returnUrl(req, "/page/");
-		boolean showHelp = ServerConfigurationService.getBoolean("display.help.menu",
-				true);
+		
+		// Should be pushed up to the API, similar to server configiuration service, but supporting an Enum(always, never, true, false).
+		boolean showHelp = true;
+		// Supports true, false, never, always
+		String showHelpGlobal = ServerConfigurationService.getString("display.help.menu", "true");
+		
+		if ("never".equals(showHelp))
+		{
+			showHelp = false;
+		}
+		else if ("always".equals(showHelpGlobal))
+		{
+			showHelp = true;
+		}
+		else
+		{
+			showHelp = Boolean.valueOf(showHelpGlobal).booleanValue();
+			String showHelpSite = site.getProperties().getProperty("display-help-menu");
+			if (showHelpSite != null)
+			{
+				showHelp = Boolean.valueOf(showHelpSite).booleanValue();
+			}
+		}
+		
 		String iconUrl = "";
 		try { 
 			if (site.getIconUrlFull() != null)
@@ -649,13 +671,9 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		} else if ("always".equals(globalShowPresence)) {
 			showPresence = true;
 		} else {
+			showPresence = Boolean.valueOf(globalShowPresence).booleanValue();
 			String showPresenceSite = site.getProperties().getProperty("display-users-present");
-				
-			if (showPresenceSite == null)
-			{
-				showPresence = Boolean.valueOf(globalShowPresence).booleanValue();  
-			}
-			else 
+			if (showPresenceSite != null)
 			{
 				showPresence = Boolean.valueOf(showPresenceSite).booleanValue();
 			}	
@@ -1172,6 +1190,15 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 
 	public String getSiteAlias(String siteId) {
 		return SiteService.getInstance().lookupSiteAlias(siteId);
+	}
+
+	public boolean isJoinable(String siteId, String userId) {
+		try {
+			Site site = SiteService.getInstance().getSite(siteId);
+			return site.isJoinable() && site.getUserRole(userId) == null;
+		} catch (IdUnusedException e) {
+		}
+		return false;
 	}
 
 

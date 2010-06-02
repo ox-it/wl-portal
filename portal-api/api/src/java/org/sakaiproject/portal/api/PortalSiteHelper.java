@@ -96,6 +96,11 @@ public interface PortalSiteHelper
                         SitePage page, String toolContextPath, String portalPrefix, boolean doPages,
                         boolean resetTools, boolean includeSummary);
 
+	Map convertSiteToMap(HttpServletRequest req, Site s, String prefix,
+			String currentSiteId, String myWorkspaceSiteId, boolean includeSummary,
+			boolean expandSite, boolean resetTools, boolean doPages,
+			String toolContextPath, boolean loggedIn);
+	
 	/**
 	 * Generates a SiteView object from the current request and location
 	 * @param view
@@ -124,6 +129,6 @@ public interface PortalSiteHelper
 	
 	public String getSiteAlias(String siteId);
 
-
+	public boolean isJoinable(String siteId, String userId);
 
 }
