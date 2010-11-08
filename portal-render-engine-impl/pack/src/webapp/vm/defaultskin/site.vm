@@ -71,6 +71,7 @@
 							</ul>
 						</div>
 						<div id="loginLinks">
+						${rloader.sit_prelogin}
 						#if (${displayUserloginInfo})
 							<span id="loginUser" title="${loginUserDispId}">${loginUserDispName}</span> |
 						#end						
@@ -86,6 +87,7 @@
 							<a href="${loginLogInOutUrl2}" title="${loginMessage2}" id="loginLink2" >${loginMessage2}</a>
 							#end
 						#end
+						${rloader.sit_postlogin}
 						</div>
 					#else
 						<form id="loginForm" method="post" action="${loginPortalPath}/xlogin" enctype="application/x-www-form-urlencoded">
