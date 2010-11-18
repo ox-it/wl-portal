@@ -71,9 +71,11 @@
 							</ul>
 						</div>
 						<div id="loginLinks">
-						${rloader.sit_prelogin}
+						
 						#if (${displayUserloginInfo})
 							<span id="loginUser" title="${loginUserDispId}">${loginUserDispName}</span> |
+						#else
+							${rloader.sit_prelogin}
 						#end						
 						#if (${loginHasImage1}) 
 							<a href="${loginLogInOutUrl}" title="${loginMessage}" id="loginLink1" ><img src="${loginImage1}" alt="${loginMessage}"/></a>
@@ -87,7 +89,9 @@
 							<a href="${loginLogInOutUrl2}" title="${loginMessage2}" id="loginLink2" >${loginMessage2}</a>
 							#end
 						#end
-						${rloader.sit_postlogin}
+						#if (!${displayUserloginInfo})
+							${rloader.sit_postlogin}
+						#end
 						</div>
 					#else
 						<form id="loginForm" method="post" action="${loginPortalPath}/xlogin" enctype="application/x-www-form-urlencoded">
