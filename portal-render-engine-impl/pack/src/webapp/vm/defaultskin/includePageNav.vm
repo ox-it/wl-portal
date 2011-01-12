@@ -6,6 +6,9 @@
 			#if (!${sitePages.pageNavPublished})
 					<p id="siteStatus">unpublished site</p>
 			#end
+			#if (${sitePages.softlyDeleted})
+					<p id="siteStatusSoftlyDeleted">${rloader.sit_softly_deleted}</p>
+			#end
 			#if ($sitePages.pageNavType && $sitePages.pageNavType != "project" )
 					<p id="siteType">$sitePages.pageNavType</p>
 			#end
