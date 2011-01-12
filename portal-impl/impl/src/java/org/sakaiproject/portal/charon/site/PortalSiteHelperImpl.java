@@ -727,6 +727,8 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 			ServerConfigurationService.getBoolean("display.users.present.iframe", false)) );
 		theMap.put("sakaiPresenceTimeDelay", Integer.valueOf(
 			ServerConfigurationService.getInt("display.users.present.time.delay", 3000)) );
+		//add softly deleted status
+		theMap.put("softlyDeleted", site.isSoftlyDeleted());
 
 		return theMap;
 	}

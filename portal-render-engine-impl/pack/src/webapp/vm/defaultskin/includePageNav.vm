@@ -8,7 +8,9 @@
 				</div>
 			#end
 				<div id="worksiteLogo">
-			#if (!${sitePages.pageNavPublished})
+			#if (${sitePages.softlyDeleted})
+					<p id="siteStatusSoftlyDeleted">${rloader.sit_softly_deleted}</p>
+			#elseif (!${sitePages.pageNavPublished})
 					<p id="siteStatus">${rloader.sit_unpublished}</p>
 			#end
 			#if ($sitePages.pageNavType && $sitePages.pageNavType != "project" )
