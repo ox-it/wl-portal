@@ -152,6 +152,18 @@ public class SiteNeighbourhoodServiceImpl implements SiteNeighbourhoodService
 
 		// remove all in exclude from mySites
 		mySites.removeAll(prefExclude);
+		
+		List<Site> softlyDeletedSites = new ArrayList<Site>(); 
+		
+		// also remove all that are softly deleted - admin users will still be able to find these in Worksite Setup.
+		// Modified block for 2.6
+		for (Site site: mySites) {
+			if(site.isSoftlyDeleted()) {
+				softlyDeletedSites.add(site);
+			}
+  		}
+
+		mySites.removeAll(softlyDeletedSites);
 
 		// Prepare to put sites in the right order
 		Vector<Site> ordered = new Vector<Site>();
