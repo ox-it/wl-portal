@@ -3,11 +3,10 @@
 			<div class="divColor" id="toolMenuWrap">
 				<div id="worksiteLogo">
 				<!-- Make it collapse in IE-->
-			#if (!${sitePages.pageNavPublished})
-					<p id="siteStatus">unpublished site</p>
-			#end
 			#if (${sitePages.softlyDeleted})
 					<p id="siteStatusSoftlyDeleted">${rloader.sit_softly_deleted}</p>
+			#elseif (!${sitePages.pageNavPublished})
+					<p id="siteStatus">unpublished site</p>
 			#end
 			#if ($sitePages.pageNavType && $sitePages.pageNavType != "project" )
 					<p id="siteType">$sitePages.pageNavType</p>
