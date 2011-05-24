@@ -136,26 +136,21 @@ public class PageHandler extends BasePortalHandler
 		catch (PermissionException e)
 		{
 			// if not logged in, give them a chance
-			if (session.getUserId() == null)
-			{
+			if (session.getUserId() == null) {
 
 				StoredState ss = portalService.newStoredState("", "");
 				ss.setRequest(req);
 				ss.setToolContextPath(toolContextPath);
 				portalService.setStoredState(ss);
-				System.out.println("PageHandler.doPage ["+false+"]");
 				portal.doLogin(req, res, session, req.getPathInfo(), false);
-			}
-			else if (twoFactorAuthentication.isTwoFactorRequired("/site/"+page.getSiteId())
-					&& !twoFactorAuthentication.hasTwoFactor())
-			{
-				System.out.println("PageHandler.doPage ["+LoginRoute.TWOFACTOR+"]");
+				
+			} else if (twoFactorAuthentication.isTwoFactorRequired("/site/"+page.getSiteId())
+					&& !twoFactorAuthentication.hasTwoFactor())	{
 				portal.doLogin(req, res, session, req.getPathInfo(), LoginRoute.TWOFACTOR);
-			}
-			else
-			{
-				System.out.println("PageHandler.doPage ["+Portal.ERROR_WORKSITE+"]");
+				
+			} else {
 				portal.doError(req, res, session, Portal.ERROR_WORKSITE);
+				
 			}
 			return;
 		}
