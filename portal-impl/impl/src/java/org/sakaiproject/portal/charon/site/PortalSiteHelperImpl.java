@@ -694,6 +694,9 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 				&& loggedIn));
 		theMap.put("pageNavPresenceUrl", presenceUrl);
 
+		//add softly deleted status
+		theMap.put("softlyDeleted", site.isSoftlyDeleted());
+
 		return theMap;
 	}
 
