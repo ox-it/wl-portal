@@ -862,18 +862,25 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 			session.setAttribute(Tool.HELPER_DONE_URL, returnUrl);
 		}
 
-		ActiveTool tool = ActiveToolManager.getActiveTool("sakai.login");
- 
+		ActiveTool tool = null;
 		String context = req.getContextPath() + req.getServletPath() + "/relogin"; 
 		String loginPath = "";
 		if (forceContainer || LoginRoute.CONTAINER.equals(route)) {
+			tool = ActiveToolManager.getActiveTool("sakai.login");
 			loginPath = "/relogin";
+			
 		} else if (LoginRoute.SAKAI.equals(route)) {
+			tool = ActiveToolManager.getActiveTool("sakai.login");
 			loginPath = "/xlogin";
+			
+		} else if (LoginRoute.TWOFACTOR.equals(route)) {
+			tool = ActiveToolManager.getActiveTool("sakai.twofactor");
+			loginPath = "/2flogin";
+			
 		} else {
+			tool = ActiveToolManager.getActiveTool("sakai.login");
 			loginPath = "/login";
 		}
-		
 		tool.help(req, res, context, loginPath);
 	}
 

@@ -33,6 +33,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.sakaiproject.authz.api.TwoFactorAuthentication;
+import org.sakaiproject.component.cover.ComponentManager;
 import org.sakaiproject.component.cover.ServerConfigurationService;
 import org.sakaiproject.exception.IdUnusedException;
 import org.sakaiproject.exception.PermissionException;
@@ -40,6 +42,7 @@ import org.sakaiproject.portal.api.Portal;
 import org.sakaiproject.portal.api.PortalHandlerException;
 import org.sakaiproject.portal.api.PortalRenderContext;
 import org.sakaiproject.portal.api.StoredState;
+import org.sakaiproject.portal.api.Portal.LoginRoute;
 import org.sakaiproject.site.api.Site;
 import org.sakaiproject.site.api.SitePage;
 import org.sakaiproject.site.api.ToolConfiguration;
@@ -119,6 +122,8 @@ public class PageHandler extends BasePortalHandler
 
 		// permission check - visit the site
 		Site site = null;
+		TwoFactorAuthentication twoFactorAuthentication = 
+			(TwoFactorAuthentication)ComponentManager.get(TwoFactorAuthentication.class);
 		try
 		{
 			site = SiteService.getSiteVisit(page.getSiteId());
@@ -138,10 +143,18 @@ public class PageHandler extends BasePortalHandler
 				ss.setRequest(req);
 				ss.setToolContextPath(toolContextPath);
 				portalService.setStoredState(ss);
+				System.out.println("PageHandler.doPage ["+false+"]");
 				portal.doLogin(req, res, session, req.getPathInfo(), false);
+			}
+			else if (twoFactorAuthentication.isTwoFactorRequired("/site/"+page.getSiteId())
+					&& !twoFactorAuthentication.hasTwoFactor())
+			{
+				System.out.println("PageHandler.doPage ["+LoginRoute.TWOFACTOR+"]");
+				portal.doLogin(req, res, session, req.getPathInfo(), LoginRoute.TWOFACTOR);
 			}
 			else
 			{
+				System.out.println("PageHandler.doPage ["+Portal.ERROR_WORKSITE+"]");
 				portal.doError(req, res, session, Portal.ERROR_WORKSITE);
 			}
 			return;
