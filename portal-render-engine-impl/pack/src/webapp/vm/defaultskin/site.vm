@@ -73,6 +73,9 @@
 						<div id="loginLinks">
 						
 						#if (${displayUserloginInfo})
+							#if (${loginHasTwoFactor})
+								<span id="hasTwoFactor" title="${rloader.has_two_factor}"></span>
+							#end
 							<span id="loginUser" title="${loginUserDispId}">${loginUserDispName}</span> |
 						#else
 							${rloader.sit_prelogin}
@@ -134,6 +137,9 @@
 					#if (!${loginTopLogin})
 						<div id="loginLinks">
 					#if (${displayUserloginInfo})
+							#if (${loginHasTwoFactor})
+								<span id="hasTwoFactor" title="${rloader.has_two_factor}"></span>
+							#end
 							<span id="loginUser">${loginUserDispName} (${loginUserDispId}) | </span>
 					#end						
 					#if (${loginHasImage1}) 
