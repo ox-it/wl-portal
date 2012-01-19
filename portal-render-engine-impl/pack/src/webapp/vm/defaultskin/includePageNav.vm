@@ -27,7 +27,7 @@
                         #end
 				<a id="totoolmenu" class="skip" name="totoolmenu"></a>
 				<h1 class="skip">${rloader.sit_toolshead}</h1>
-				<div id="toolMenu">
+				<div class="toolMenu">
 					<ul>
 			#foreach( $page in $sitePages.pageNavTools )
 		  		#if (${page.current})
@@ -63,7 +63,7 @@
 				
 			<!-- Add subsite lists -->
 			#if ( $subSites ) 
-				<div id="subSites">
+				<div class="subSites">
 					<ul>
 				#foreach ( $site in $subSites ) 
 						<li>
