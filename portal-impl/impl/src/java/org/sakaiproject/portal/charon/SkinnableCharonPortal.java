@@ -737,6 +737,15 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 		toolMap.put("toolShowHelpButton", Boolean.valueOf(showHelpButton));
 		toolMap.put("toolHelpActionUrl", helpActionUrl);
 		toolMap.put("toolId", toolId);
+		
+		String directToolUrl = ServerConfigurationService.getPortalUrl() + "/" + DirectToolHandler.URL_FRAGMENT +"/" + Web.escapeUrl(placement.getId()) + "/";
+		toolMap.put("directToolUrl", directToolUrl);
+		
+		//props to enable/disable the display on a per tool/placement basis
+		//will be displayed if not explicitly disabled in the tool/placement properties
+		boolean showDirectToolUrl = !"false".equals(placement.getConfig().getProperty(Portal.TOOL_DIRECTURL_ENABLED_PROP));
+		toolMap.put("showDirectToolUrl", showDirectToolUrl);
+		
 		return toolMap;
 	}
 
@@ -1183,6 +1192,9 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 		}
 		boolean isWirelessDevice = session.getAttribute("is_wireless_device") != null ? ((Boolean) session.getAttribute("is_wireless_device")).booleanValue():false;
 		rcontext.put("portal_add_mobile_link",Boolean.valueOf( "true".equals(addMLnk) && isWirelessDevice ) ) ;
+		
+		rcontext.put("shortUrlEnabled", ServerConfigurationService.getBoolean("shortenedurl.portal.enabled", false));
+		
 		return rcontext;
 	}
 

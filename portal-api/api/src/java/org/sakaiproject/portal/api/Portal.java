@@ -157,6 +157,12 @@ public interface Portal
 	 */
 	public static final String SAKAI_NAV_MINIMIZED = "sakai_nav_minimized";
 	
+
+	/**
+	 * Tool property to allow the enabling/disabling of the direct url linking UI
+	 */
+	public static final String TOOL_DIRECTURL_ENABLED_PROP = "sakai:tool-directurl-enabled";
+        
 	/**
 	 * prepare the response and send it to the render engine
 	 * 
