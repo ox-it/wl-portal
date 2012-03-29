@@ -22,6 +22,7 @@ package org.sakaiproject.portal.charon;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -1648,7 +1649,8 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 					ServerConfigurationService.getString("container.login"));
 			// Should we keep the path after Login?
 			boolean keepPath = ServerConfigurationService.getBoolean("login.keep.path", false);
-			String returnPath = (keepPath)?"?returnPath="+ req.getPathInfo():"";
+			// Must encode or we expose an XSS
+			String returnPath = (keepPath)?"?returnPath="+  URLEncoder.encode(req.getPathInfo()):"";
 			
 			if (containerLogin) topLogin = false;
 			
@@ -1759,7 +1761,7 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 				rcontext.put("loginPwWording", pwWording);
 				rcontext.put("loginWording", loginWording);
 				if (keepPath) {
-					rcontext.put("returnPath", req.getPathInfo());
+					rcontext.put("returnPath", URLEncoder.encode(req.getPathInfo()));
 				}
 			}
 
