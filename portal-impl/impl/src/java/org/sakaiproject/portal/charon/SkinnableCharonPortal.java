@@ -202,6 +202,9 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 	// public String PROP_SHOW_SUBSITES = "sakai:show-subsites";
 
 	// http://wurfl.sourceforge.net/
+	// WURFL uses up a large amount of heap, as we don't use it we can skip loading it
+	// and save ourselves some heap.
+	private boolean wurflEnabled = true;
 	private boolean wurflLoaded = false;
 
 	private WURFLHolder wurflHolder = null;
@@ -1028,7 +1031,7 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 	public void setupWURFL()
 	{
 		// Only do this once
-		if ( wurflLoaded ) return;
+		if ( !wurflEnabled || wurflLoaded ) return;
 		wurflLoaded = true;
 		try {
 
@@ -1165,7 +1168,7 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 		
 		// show the mobile link or not
 		Session session = SessionManager.getCurrentSession();
-		if (session.getAttribute("is_wireless_device") == null && request != null)
+		if (wurfl != null && session.getAttribute("is_wireless_device") == null && request != null)
 		{
 			// when user logs out, all session variables are cleaned, this is to reset the is_wireless_device attribute in portal
 			Device device = null;
@@ -1828,6 +1831,8 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 		handlerPrefix = ServerConfigurationService.getString("portal.handler.default", "site");
 		
 		gatewaySiteUrl = ServerConfigurationService.getString("gatewaySiteUrl", null);
+		
+		wurflEnabled = ServerConfigurationService.getBoolean("portal.wurfl.enabled", true);
 		
 		// Load the related links.
 		List<String> linkUrls = Arrays.asList(emptyNotNull(ServerConfigurationService.getStrings("related.link.url")));
