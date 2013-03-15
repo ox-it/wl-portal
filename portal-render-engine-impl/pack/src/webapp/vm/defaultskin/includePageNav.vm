@@ -84,7 +84,7 @@
 			<!-- Add subsite lists --> 
 			#foreach ( $site in $children ) 
 				        <li>
-				             <a class="${sitePages.subsiteClass} #if(!${site.isPublished})unpublished#end" href="${site.siteUrl}" title="${site.shortDescription}">
+				             <a class="${site.type} #if(!${site.isPublished})unpublished#end" href="${site.siteUrl}" title="${site.shortDescription}">
 				             <span>${site.siteTitle}</span>
 				             </a>
 				        </li>
