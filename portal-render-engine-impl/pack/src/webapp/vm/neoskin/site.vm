@@ -63,10 +63,12 @@
 					<div id="mastLogo">
 					#if (${logoLink})
 						<a href="${logoLink}" #if(${logoTitle})title="${logoTitle}"#end>
-							<img alt="${logoAlt}" src="${logoSkinRepo}/${logoSkin}/images/logo_inst.gif" />
+							<img alt="${logoAlt}" src="${logoSkinRepo}/${logoSkin}/images/logo.png" />
+							<p id="logotext">WebLearn</p>
 						</a>
 					#else
-						<img alt="${logoAlt}" src="${logoSkinRepo}/${logoSkin}/images/logo_inst.gif" />
+						<img alt="${logoAlt}" src="${logoSkinRepo}/${logoSkin}/images/logo.png" />
+						<p id="logotext">WebLearn</p>
 					#end
 					</div>
 					<div id="mastBanner">
@@ -80,10 +82,8 @@
 					</div>
 				</div>
 #parse("/vm/neoskin/includeTabs.vm")
-	  </div>
-			
-
-		</div>
+			</div> <!-- end #siteNavWrapper -->
+		</div> <!-- end #headerMax -->
 		#else
 
 		<div id="headerMin">
@@ -105,29 +105,18 @@
 			<div id="siteNavWrapper" class="${logoSiteClass}">
 				<div id="mastHead" role="banner">
 					<div id="mastLogo">
-						<img title="Logo" alt="Logo" src="${logoSkinRepo}/${logoSkin}/images/logo_inst.gif" />
+						<img title="Logo" alt="Logo" src="${logoSkinRepo}/${logoSkin}/images/logo.png" />
+						<p id="logotext">WebLearn</p>
 					</div>
 					<div id="mastBanner">
 						<img title="Banner" alt="Banner" src="${logoSkinRepo}/${logoSkin}/images/banner_inst.gif" />
 					</div>
 					<!-- login component -->
 					<div id="mastLogin">
-					#if (!${loginTopLogin})
-						<div id="relatedLinks">
-							<ul>
-							#foreach($relatedLink in $relatedLinks)
-								<li><a href="$relatedLink.url" title="$relatedLink.title" target="_new">$relatedLink.name</a></li>
-							#end
-							</ul>
-						</div>
-						<div id="loginLinks">
+					<div id="loginLinks">
+
 					#if (${loginHasTwoFactor})
 						<span id="hasTwoFactor" title="${rloader.has_two_factor}"></span>
-					#end
-					#if (${loginHasImage1}) 
-							<a href="${loginLogInOutUrl}" title="${loginMessage}" id="loginLink1" ><img src="${loginImage1}" alt="${loginMessage}"/></a>
-					#else
-							<a href="${loginLogInOutUrl}" title="${loginMessage}" id="loginLink1" >${loginMessage}</a>
 					#end
 					#if (${loginHasLogInOutUrl2})
 					#if (${loginHasImage2}) 
@@ -135,8 +124,13 @@
 					#else
 							<a href="${loginLogInOutUrl2}" title="${loginMessage2}" id="loginLink2" >${loginMessage2}</a>
 					#end
+					#if (${loginHasImage1})
+						<a href="${loginLogInOutUrl}" title="${loginMessage}" id="loginLink1" ><img src="${loginImage1}" alt="${loginMessage}"/></a>
+					#else
+						<a href="${loginLogInOutUrl}" title="${loginMessage}" id="loginLink1" >${loginMessage}</a>
 					#end
-						</div>
+					<p id="prelogin">${rloader.sit_prelogin}</p>
+					</div>
 					#else
 						<form id="loginForm" method="post" action="${loginPortalPath}/xlogin" enctype="application/x-www-form-urlencoded">
 							<input type="hidden" name="returnPath" value="$!{returnPath}"/>

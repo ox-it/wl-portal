@@ -22,12 +22,7 @@
 package org.sakaiproject.portal.charon.handlers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,13 +31,14 @@ import javax.servlet.http.Cookie;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.sakaiproject.authz.api.DevolvedSakaiSecurity;
 import org.sakaiproject.authz.api.Role;
 import org.sakaiproject.authz.api.SecurityAdvisor;
-import org.sakaiproject.authz.cover.AuthzGroupService;
 import org.sakaiproject.authz.cover.SecurityService;
+import org.sakaiproject.component.cover.ComponentManager;
 import org.sakaiproject.component.cover.ServerConfigurationService;
+import org.sakaiproject.entity.api.Entity;
 import org.sakaiproject.entity.api.ResourceProperties;
-import org.sakaiproject.entity.api.ResourcePropertiesEdit;
 import org.sakaiproject.entity.cover.EntityManager;
 import org.sakaiproject.event.api.Event;
 import org.sakaiproject.event.cover.EventTrackingService;
@@ -55,7 +51,6 @@ import org.sakaiproject.portal.api.PortalRenderContext;
 import org.sakaiproject.portal.api.SiteView;
 import org.sakaiproject.portal.api.StoredState;
 import org.sakaiproject.portal.charon.site.AllSitesViewImpl;
-import org.sakaiproject.tool.api.Tool;
 import org.sakaiproject.site.api.Site;
 import org.sakaiproject.site.api.SitePage;
 import org.sakaiproject.site.api.ToolConfiguration;
@@ -72,11 +67,8 @@ import org.sakaiproject.util.Web;
 import org.sakaiproject.util.ResourceLoader;
 import org.sakaiproject.portal.util.URLUtils;
 import org.sakaiproject.portal.util.ToolUtils;
-import org.sakaiproject.portal.util.PortalUtils;
 import org.sakaiproject.portal.util.ByteArrayServletResponse;
 import org.sakaiproject.util.Validator;
-
-import org.sakaiproject.portal.charon.handlers.PDAHandler;
 
 /**
  * @author ieb
@@ -101,7 +93,9 @@ public class SiteHandler extends WorksiteHandler
 	private boolean useDHTMLMore = false;
 	
 	private static ResourceLoader rb = new ResourceLoader("sitenav");
-	
+
+	private DevolvedSakaiSecurity devolvedSakaiSecurity;
+
 	// When these strings appear in the URL they will be replaced by a calculated value based on the context.
 	// This can be replaced by the users myworkspace.
 	private String mutableSitename ="-";
@@ -117,6 +111,7 @@ public class SiteHandler extends WorksiteHandler
 				"portal.use.dhtml.more", true));
 		mutableSitename =  ServerConfigurationService.getString("portal.mutable.sitename", "-");
 		mutablePagename =  ServerConfigurationService.getString("portal.mutable.pagename", "-");
+		devolvedSakaiSecurity = (DevolvedSakaiSecurity) ComponentManager.get(DevolvedSakaiSecurity.class);
 	}
 
 	@Override
@@ -481,6 +476,8 @@ public class SiteHandler extends WorksiteHandler
 		
 		includeSiteNav(rcontext, req, session, siteId);
 
+		includeSiteBanner(rcontext, site);
+
 		includeWorksite(rcontext, res, req, session, site, page, toolContextPath,
 					getUrlFragment());
 
@@ -640,7 +637,7 @@ public class SiteHandler extends WorksiteHandler
 			rcontext.put("logoLink", logoLink);
 			rcontext.put("logoAlt", logoAlt);
 			rcontext.put("logoTitle", logoTitle);
-			portal.includeLogin(rcontext, req, session, siteId);
+			portal.includeLogin(rcontext, req, session);
 		}
 	}
 
@@ -868,6 +865,137 @@ public class SiteHandler extends WorksiteHandler
 
 			rcontext.put("allowAddSite",allowAddSite);
 		}
+	}
+
+	public void includeSiteBanner(PortalRenderContext rcontext, Site site) {
+		BannerContextPreparer contextPreparer = new BannerContextPreparer(site);
+		Map<String, String> context = contextPreparer.prepare();
+		rcontext.put("banner", context);
+	}
+
+	/**
+	 * Encapsulates the logic involved in preparing the banner for a site.
+	 */
+	private class BannerContextPreparer
+	{
+
+		private static final String MESSAGE = "message";
+		private static final String IMAGE_SOURCE = "imageSource";
+		private static final String IMAGE_LINK = "imageLink";
+		private static final String BACKGROUND_COLOUR = "backgroundColour";
+		private static final String BACKGROUND_IMAGE = "backgroundImage";
+		private static final String FONT_COLOUR = "fontColour";
+
+		private static final String DEFAULT_PREFIX = "banner.default.";
+		private static final String SITE_PREFIX = "banner.";
+		private static final String OVERRIDE_PREFIX = "banner.override.";
+
+		private Site site;
+
+		public BannerContextPreparer(Site site)
+		{
+			this.site = site;
+		}
+
+		/**
+		 * Collect each parameter for the site banner with the following precedence:
+		 *
+		 *   1. use the value defined in the site's properties;
+		 *   2. if not defined use the "banner overrides" value in the admin site properties;
+		 *   3. if still not defined use the site title and values defined in the server properties.
+		 *
+		 * @return a set of parameters for the banner
+		 */
+		public Map<String, String> prepare()
+		{
+
+			final Map<String, String> context = new LinkedHashMap<String, String>();
+
+			mergeContexts(context, getDefaultBannerProperties());
+			mergeContexts(context, getPropertiesOverridenByAdminSite());
+			mergeContexts(context, getSiteBannerProperties());
+
+			return context;
+		}
+
+		/** Similar to Map.putall but ignores empty values */
+		private void mergeContexts(Map<String, String> source, Map<String, String> target)
+		{
+			for (Map.Entry<String, String> entry : target.entrySet())
+			{
+				if(entry.getValue() != null && !entry.getValue().isEmpty())
+				{
+					source.put(entry.getKey(), entry.getValue());
+				}
+			}
+		}
+
+		private Map<String, String> getDefaultBannerProperties()
+		{
+			final Map<String, String> context = new LinkedHashMap<String, String>();
+
+			context.put("message", site.getTitle());
+			context.put(IMAGE_SOURCE,      ServerConfigurationService.getString(DEFAULT_PREFIX + IMAGE_SOURCE));
+			context.put(IMAGE_LINK,        ServerConfigurationService.getString(DEFAULT_PREFIX + IMAGE_LINK));
+			context.put(BACKGROUND_COLOUR, ServerConfigurationService.getString(DEFAULT_PREFIX + BACKGROUND_COLOUR));
+			context.put(BACKGROUND_IMAGE,  ServerConfigurationService.getString(DEFAULT_PREFIX + BACKGROUND_IMAGE));
+			context.put(FONT_COLOUR,       ServerConfigurationService.getString(DEFAULT_PREFIX + FONT_COLOUR));
+
+			return context;
+		}
+
+		private Map<String, String> getSiteBannerProperties()
+		{
+			final Map<String, String> context = new LinkedHashMap<String, String>();
+			final ResourceProperties siteProperties = site.getProperties();
+
+			context.put(MESSAGE,           siteProperties.getProperty(SITE_PREFIX + MESSAGE));
+			context.put(IMAGE_SOURCE,      siteProperties.getProperty(SITE_PREFIX + IMAGE_SOURCE));
+			context.put(IMAGE_LINK,        siteProperties.getProperty(SITE_PREFIX + IMAGE_LINK));
+			context.put(BACKGROUND_COLOUR, siteProperties.getProperty(SITE_PREFIX + BACKGROUND_COLOUR));
+			context.put(BACKGROUND_IMAGE,  siteProperties.getProperty(SITE_PREFIX + BACKGROUND_IMAGE));
+			context.put(FONT_COLOUR,       siteProperties.getProperty(SITE_PREFIX + FONT_COLOUR));
+
+			return context;
+		}
+
+		private Map<String, String> getPropertiesOverridenByAdminSite()
+		{
+			final Map<String, String> context = new LinkedHashMap<String, String>();
+
+			ResourceProperties adminSiteProperties = adminSitePropertiesFor();
+
+			if (adminSiteProperties != null) {
+				context.put(MESSAGE,           adminSiteProperties.getProperty(OVERRIDE_PREFIX + MESSAGE));
+				context.put(IMAGE_SOURCE,      adminSiteProperties.getProperty(OVERRIDE_PREFIX + IMAGE_SOURCE));
+				context.put(IMAGE_LINK,        adminSiteProperties.getProperty(OVERRIDE_PREFIX + IMAGE_LINK));
+				context.put(BACKGROUND_COLOUR, adminSiteProperties.getProperty(OVERRIDE_PREFIX + BACKGROUND_COLOUR));
+				context.put(BACKGROUND_IMAGE,  adminSiteProperties.getProperty(OVERRIDE_PREFIX + BACKGROUND_IMAGE));
+				context.put(FONT_COLOUR,       adminSiteProperties.getProperty(OVERRIDE_PREFIX + FONT_COLOUR));
+			}
+
+			return context;
+		}
+
+		private ResourceProperties adminSitePropertiesFor()
+		{
+			final String adminRealm = devolvedSakaiSecurity.getAdminRealm(site.getReference());
+
+			if(adminRealm == null)
+			{
+				return null;
+			}
+
+			final Entity adminEntity = EntityManager.newReference(adminRealm).getEntity();
+
+			if(adminEntity == null)
+			{
+				return null;
+			}
+
+			return adminEntity.getProperties();
+		}
+
 	}
 
 }

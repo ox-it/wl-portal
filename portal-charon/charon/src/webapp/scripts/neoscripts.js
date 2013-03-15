@@ -525,6 +525,10 @@ var setupSiteNav = function(){
         $(this).prev('ul').slideDown('fast')
      });
 
+    jQuery('li#quicklinks a').click(function(e) {
+        $(this).parent('li').children('span.drop')[0].click();
+    });
+
 	fixTopNav = function(e){
         if (e.keyCode == 40) { // downarrow
             e.preventDefault();
