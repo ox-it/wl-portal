@@ -783,6 +783,11 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 			return null;
 		}
 		
+		/*
+			WL-3008 disabling the distinction between mobile devices since CKEdit works in modern browsers / devices
+			and we don't use the pda portal anyway. CKEdit appears to fall back nicely to a textarea when it can't be used.
+			Also, this code gets replaced upstream by SAK-22302 anyway.
+
 		String deviceName = device.getId();
 
 		// Not a device recognized by WURFL
@@ -799,7 +804,8 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 			}
 			return null;
 		}
-		
+		*/
+		return null;
 	}
 
 
@@ -1165,9 +1171,15 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 		rcontext.put("portal_allow_auto_minimize",Boolean.valueOf( "true".equals(minStr) ) ) ;
 		// copy the add link to /mobile to the content
 		String addMLnk = ServerConfigurationService.getString("portal.add.mobile.link","false");
-		
-		// show the mobile link or not
+
 		Session session = SessionManager.getCurrentSession();
+
+		/*
+			WL-3008 disabling the distinction between mobile devices since CKEdit works in modern browsers / devices
+			and we don't use the pda portal anyway. CKEdit appears to fall back nicely to a textarea when it can't be used.
+			Also, this code gets replaced upstream by SAK-22302 anyway.
+
+		// show the mobile link or not
 		if (wurfl != null && session.getAttribute("is_wireless_device") == null && request != null)
 		{
 			// when user logs out, all session variables are cleaned, this is to reset the is_wireless_device attribute in portal
@@ -1194,6 +1206,8 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 				}
 			}
 		}
+		*/
+
 		boolean isWirelessDevice = session.getAttribute("is_wireless_device") != null ? ((Boolean) session.getAttribute("is_wireless_device")).booleanValue():false;
 		rcontext.put("portal_add_mobile_link",Boolean.valueOf( "true".equals(addMLnk) && isWirelessDevice ) ) ;
 		
