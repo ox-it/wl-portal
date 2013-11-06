@@ -109,7 +109,7 @@
 									<span>${rloader.sit_mywor}</span>
 								</a></li>
 							#else
-								<li><a href="${site.siteUrl}" title="${site.siteTitle}">
+								<li><a href="${site.siteUrl}" title="${site.siteUrl}">
 									<span>${site.siteTitle}</span>
 								</a></li>
 							#end
