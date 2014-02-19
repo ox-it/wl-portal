@@ -131,4 +131,11 @@ public interface PortalSiteHelper
 
 	public boolean isJoinable(String siteId, String userId);
 
+	/**
+	 * Checks whether a site is published
+	 * @param siteId the id of the site
+	 * @return true if the site is published, false otherwise
+	 */
+	public boolean isSitePublished(String siteId);
+
 }
