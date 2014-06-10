@@ -113,14 +113,10 @@
 							<h1 class="skip">${rloader.sit_worksiteshead}</h1>
 							#foreach ( $site in $tabsSites.tabsSites )
 								#if (${site.isMyWorkspace})
-									#if (${site.isCurrentSite})
-<li class="nav-selected nav-menu"><a href="${site.siteUrl}" role="menuitem" aria-haspopup="true"><span>${rloader.sit_mywor}</span></a>
-									#else
-										#if (( ${tabDisplayLabel} == 2 ) && ( ${site.shortDescription} ))
+									#if (( ${tabDisplayLabel} == 2 ) && ( ${site.shortDescription} ))
 <li class="nav-selected nav-menu"><a href="${site.siteUrl}" title="${site.shortDescription}" role="menuitem" aria-haspopup="true"><span>${site.shortDescription}</span></a>
-										#else
+									#else
 <li class="nav-selected nav-menu"><a href="${site.siteUrl}" title="${site.fullTitle}" role="menuitem" aria-haspopup="true"><span>${site.siteTitle}</span></a>
-										#end
 									#end
 								#end
 							#end
