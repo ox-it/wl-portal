@@ -713,3 +713,34 @@ function addArrowNavAndDisableTabNav(ul,callback) {
         }
     });
 }
+
+/* Script to handle opening and closing of dialogue for previewing a site */
+$(function() {
+    $('#roleSwitchAnchor.enter').click(function(event) {
+        event.preventDefault();
+
+        var $dialogue = $('#switchRoleDialogue');
+        var $anchor = $(this);
+
+        var $mask = $dialogue.children('.mask');
+        $mask.width($(window).width());
+        $mask.height($(document).height());
+
+        var $box = $dialogue.children('.box');
+        $box.css({
+            left: ($(window).width() - $box.width()) / 2 + 'px',
+            top:  ($(window).height() - $box.height()) / 4 + 'px'
+        });
+
+        $dialogue.fadeIn(500);
+
+        var closeWindow = function(e) {
+            e.preventDefault();
+            $dialogue.hide();
+        };
+
+        $mask.click(closeWindow);
+        $box.children('.close').click(closeWindow);
+    });
+});
+

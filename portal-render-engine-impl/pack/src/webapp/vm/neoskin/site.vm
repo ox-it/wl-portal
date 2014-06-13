@@ -156,6 +156,16 @@
 
 		#end
 
+<div id="switchRoleDialogue">
+	<div class="box">
+		<h1>${rloader.rs_popupTitle}</h1>
+		${rloader.rs_popupContentHtml}
+		<a class="button" href="$switchRoleUrl">${rloader.rs_popupContinue}</a>
+        <a class="button close" href="#">${rloader.rs_popupClose}</a>
+    </div>
+	<div class="mask"></div>
+</div>
+
 #parse("/vm/neoskin/includePageWithNav.vm")
 
 #parse("/vm/neoskin/includeAnalytics.vm")
