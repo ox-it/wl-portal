@@ -84,6 +84,7 @@
 					</ul>
 				</div>
 			#if ($children.size() > 0)
+				<h1 class="skip">Subsites begin here</h1>
 				<h1>${rloader.sit_subsiteshead}</h1>
 				<div id="toolMenu" class="toolMenu subSites">
 				
