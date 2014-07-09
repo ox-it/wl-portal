@@ -239,6 +239,7 @@
 			<!-- end include Bottom -->
 				</div>
 				<div class="sakaiCopyrightInfo">${bottomNavCopyright}</div>
+				<div class="serviceInfo">${bottomNavService} - ${bottomNavServiceVersion} - Sakai ${bottomNavSakaiVersion} (Kernel ${bottomNavKernelVersion}) - Server ${bottomNavServer}</div>
 				#if ($showServerTime == "true")
 			 	<div class="server-time-container">
 					#if ($showPreferredTzTime == "true")
