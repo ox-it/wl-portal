@@ -1,5 +1,6 @@
 <!-- START from includeBreadcrumbs.vm -->
 #if ($parents && $parents.size() > 0)
+<h1 class="skip">${rloader.sit_breadcrumbhead}</h1>
 <ul id="siteHierarchy">
     #set ($tabCountBread= 0)
 
