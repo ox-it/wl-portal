@@ -233,6 +233,8 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 
 	private List<Map>relatedLinks;
 
+	public static final String LOGIN = " Login";
+
 	private PageFilter pageFilter = new PageFilter() {
 
 		public List filter(List newPages, Site site)
@@ -1892,7 +1894,7 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 					
 					// check for a login text override
 					message = StringUtils.trimToNull(ServerConfigurationService
-							.getString("login.text"));
+							.getString("login.text") + LOGIN);
 					if (message == null) message = rloader.getString("log.login");
 
 					// check for an image for the login
@@ -1905,7 +1907,7 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 					{
 						// get the text and image as configured
 						message2 = StringUtils.trimToNull(ServerConfigurationService
-								.getString("xlogin.text"));
+								.getString("xlogin.text") + LOGIN);
 						if (message2 == null) message2 = rloader.getString("log.xlogin");
 						image2 = StringUtils.trimToNull(ServerConfigurationService
 								.getString("xlogin.icon"));
