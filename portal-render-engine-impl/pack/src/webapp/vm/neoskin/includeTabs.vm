@@ -62,11 +62,6 @@
 					#if (${tabsSites.prefsToolUrl})
 <li class="submenuitem"><span><a role="menuitem" href="${tabsSites.prefsToolUrl}?sakai_nav_minimized=true" ><span class="toolMenuIcon submenuitem-prefs"> </span>${rloader.sit_preferences}</a></span></li>
 					#end
-			#if (${tabsSites.worksiteToolUrl})
-				#if ($allowAddSite)
-<li class="submenuitem"><span><a id="addNewSiteLink" role="menuitem" href="${tabsSites.worksiteToolUrl}?sakai_nav_minimized=true&panel=Shortcut&sakai_action=doNew_site&sakai.state.reset=true"><span class="toolMenuIcon submenuitem-new-site"> </span>${rloader.sit_newsite}</a></span></li>
-				#end
-			#end
 			#if (${tabsSites.tutorial})
 <li class="submenuitem"><span><a id="tutorialLink" role="menuitem" href="#" onclick="startTutorial({});"><span class="toolMenuIcon submenuitem-tutorial"> </span>${rloader.sit_tutorial}</a></span></li>
 			#end
