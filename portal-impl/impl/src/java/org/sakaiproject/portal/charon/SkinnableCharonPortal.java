@@ -152,6 +152,10 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 	 */
 	private static final long serialVersionUID = 2645929710236293089L;
 
+	public static final String CONTACT_US = "contact_us";
+
+	public static final String CONTACT_US_SITE_ID = "!contact-us";
+
 	/**
 	 * Our log (commons).
 	 */
@@ -590,6 +594,11 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 
 		// find the tool registered for this
 		ActiveTool tool = ActiveToolManager.getActiveTool(placement.getToolId());
+
+		if (req.getRequestURI().endsWith(CONTACT_US)){
+			placement = SiteService.findToolBySiteId(CONTACT_US_SITE_ID);
+		}
+
 		if (tool == null)
 		{
 			// doError(req, res, session);
