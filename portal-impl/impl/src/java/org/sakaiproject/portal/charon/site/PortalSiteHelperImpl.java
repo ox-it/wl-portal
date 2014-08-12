@@ -747,6 +747,12 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		theMap.put("helpMenuClass", "icon-sakai-help");
 		theMap.put("subsiteClass", "icon-sakai-subsite");
 
+		String showFeedback = ServerConfigurationService.getString("display.contact.us.tool", "true");
+		theMap.put("pageNavShowFeedback", Boolean.valueOf(showFeedback));
+		String feedbackUrl = ServerConfigurationService.getFeedbackUrl(effectiveSiteId);
+		theMap.put("pageNavFeedbackUrl", feedbackUrl);
+		theMap.put("feedbackMenuClass", "icon-sakai-feedback");
+
 		// theMap.put("pageNavSitContentshead",
 		// Web.escapeHtml(rb.getString("sit_contentshead")));
 

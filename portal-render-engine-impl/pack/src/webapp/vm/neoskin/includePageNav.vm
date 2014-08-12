@@ -62,6 +62,13 @@
 							</a>
 						</li>
 			#end
+			#if (${sitePages.pageNavShowFeedback})
+				<li>
+					<a class="toolMenuLink" href="${sitePages.pageNavFeedbackUrl}" title="${rloader.sit_feedback_description}">
+						<span class="toolMenuIcon ${sitePages.feedbackMenuClass}"></span><span class="menuTitle">${rloader.sit_feedback}</span>
+					</a>
+				</li>
+			#end
 			#if (${sitePages.pageNavShowHelp})
 						 <li>
 								<a class="toolMenuLink" accesskey="6" href="${sitePages.pageNavHelpUrl}" target="_blank" 
