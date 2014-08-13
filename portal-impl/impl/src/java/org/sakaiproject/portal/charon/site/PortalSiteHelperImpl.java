@@ -1417,11 +1417,7 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		return siteIsPublished;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @param siteId
-	 */
-	public String getFeedbackUrl(String siteId) {
+	private String getFeedbackUrl(String siteId) {
 		return ServerConfigurationService.getPortalUrl() + "/site/" + siteId  + "/page/" + SkinnableCharonPortal.CONTACT_US_URL_SUFFIX;
 	}
 
