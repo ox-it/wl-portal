@@ -44,6 +44,7 @@ import org.sakaiproject.alias.cover.AliasService;
 import org.sakaiproject.authz.cover.SecurityService;
 import org.sakaiproject.component.cover.ComponentManager;
 import org.sakaiproject.component.cover.ServerConfigurationService;
+import org.sakaiproject.portal.charon.SkinnableCharonPortal;
 import org.sakaiproject.tool.cover.SessionManager;
 import org.sakaiproject.user.cover.PreferencesService;
 import org.sakaiproject.user.api.Preferences;
@@ -747,9 +748,9 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		theMap.put("helpMenuClass", "icon-sakai-help");
 		theMap.put("subsiteClass", "icon-sakai-subsite");
 
-		String showFeedback = ServerConfigurationService.getString("display.contact.us.tool", "true");
-		theMap.put("pageNavShowFeedback", Boolean.valueOf(showFeedback));
-		String feedbackUrl = ServerConfigurationService.getFeedbackUrl(effectiveSiteId);
+		boolean showFeedback = ServerConfigurationService.getBoolean("display.contact.us.tool", true);
+		theMap.put("pageNavShowFeedback", showFeedback);
+		String feedbackUrl = getFeedbackUrl(effectiveSiteId);
 		theMap.put("pageNavFeedbackUrl", feedbackUrl);
 		theMap.put("feedbackMenuClass", "icon-sakai-feedback");
 
@@ -1414,6 +1415,14 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 			// not a site after all
 		}
 		return siteIsPublished;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @param siteId
+	 */
+	public String getFeedbackUrl(String siteId) {
+		return ServerConfigurationService.getPortalUrl() + "/site/" + siteId  + "/page/" + SkinnableCharonPortal.CONTACT_US_URL_SUFFIX;
 	}
 
 }

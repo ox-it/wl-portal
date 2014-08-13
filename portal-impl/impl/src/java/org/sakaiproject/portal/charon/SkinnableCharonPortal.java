@@ -48,7 +48,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.sakaiproject.authz.api.SecurityAdvisor;
-import org.sakaiproject.authz.api.SecurityAdvisor.SecurityAdvice;
 import org.sakaiproject.authz.api.SecurityService;
 import org.sakaiproject.authz.api.TwoFactorAuthentication;
 import org.sakaiproject.component.cover.ComponentManager;
@@ -66,7 +65,6 @@ import org.sakaiproject.portal.api.PortalChatPermittedHelper;
 import org.sakaiproject.portal.api.PortalHandler;
 import org.sakaiproject.portal.api.PortalRenderContext;
 import org.sakaiproject.portal.api.PortalRenderEngine;
-import org.sakaiproject.portal.api.PortalService;
 import org.sakaiproject.portal.api.PortalSiteHelper;
 import org.sakaiproject.portal.api.SiteNeighbourhoodService;
 import org.sakaiproject.portal.api.SiteView;
@@ -152,9 +150,9 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 	 */
 	private static final long serialVersionUID = 2645929710236293089L;
 
-	public static final String CONTACT_US = "contact_us";
+	public static final String CONTACT_US_URL_SUFFIX = ServerConfigurationService.getString("contact.us.tool.url.suffix", "contact_us");
 
-	public static final String CONTACT_US_SITE_ID = "!contact-us";
+	public static final String CONTACT_US_SITE_ID = ServerConfigurationService.getString("contact.us.tool.site.id", "!contact-us");
 
 	/**
 	 * Our log (commons).
@@ -595,7 +593,7 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 		// find the tool registered for this
 		ActiveTool tool = ActiveToolManager.getActiveTool(placement.getToolId());
 
-		if (req.getRequestURI().endsWith(CONTACT_US)){
+		if (req.getRequestURI().endsWith(CONTACT_US_URL_SUFFIX)){
 			placement = SiteService.findTool(CONTACT_US_SITE_ID);
 		}
 
