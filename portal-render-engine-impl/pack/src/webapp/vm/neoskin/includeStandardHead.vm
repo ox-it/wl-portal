@@ -62,7 +62,7 @@
 <link href="${pageSkinRepo}/${pageSkin}/portalchat.css" type="text/css" rel="stylesheet" media="all" />
 #end
 <link href="${pageScriptPath}jquery/cluetip/1.2.10/css/jquery.cluetip.css" type="text/css" rel="stylesheet" media="all" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans|Roboto+Slab:400,700,400italic,700italic&amp;subset=latin,latin-ext">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&amp;subset=latin,latin-ext">
 <link rel="shortcut icon" href="/favicon.ico">
 
 #if (! $currentPlacement && $isPDA )
