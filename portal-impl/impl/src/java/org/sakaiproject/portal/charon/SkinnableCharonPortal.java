@@ -594,7 +594,10 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 		ActiveTool tool = ActiveToolManager.getActiveTool(placement.getToolId());
 
 		if (req.getRequestURI().endsWith(CONTACT_US_URL_SUFFIX)){
-			placement = SiteService.findTool(CONTACT_US_SITE_ID);
+			ToolConfiguration contactUsTool = SiteService.findTool(CONTACT_US_SITE_ID);
+			if (contactUsTool!=null){
+				placement = contactUsTool;
+			}
 		}
 
 		if (tool == null)
