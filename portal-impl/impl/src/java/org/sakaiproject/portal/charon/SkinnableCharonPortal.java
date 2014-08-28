@@ -154,6 +154,8 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 
 	public static final String CONTACT_US_SITE_ID = ServerConfigurationService.getString("contact.us.tool.site.id", "!contact-us");
 
+	public static final String CONTACT_US_ORIGIN_SITE = ServerConfigurationService.getString("contact.us.origin.site", "contact.us.origin.site");
+
 	/**
 	 * Our log (commons).
 	 */
@@ -596,6 +598,9 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 		if (req.getRequestURI().endsWith(CONTACT_US_URL_SUFFIX)){
 			ToolConfiguration contactUsTool = SiteService.findTool(CONTACT_US_SITE_ID);
 			if (contactUsTool!=null){
+				Site originSite = placement.getContainingPage().getContainingSite();
+				ToolSession ts = SessionManager.getCurrentSession().getToolSession(contactUsTool.getId());
+				ts.setAttribute(CONTACT_US_ORIGIN_SITE, originSite);
 				placement = contactUsTool;
 			}
 		}
