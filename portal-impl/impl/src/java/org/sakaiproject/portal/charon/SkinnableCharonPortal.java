@@ -150,11 +150,15 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 	 */
 	private static final long serialVersionUID = 2645929710236293089L;
 
-	public static final String CONTACT_US_URL_SUFFIX = ServerConfigurationService.getString("contact.us.tool.url.suffix", "contact_us");
+	public static final String CONTACT_US_URL_SUFFIX = "contact.us.tool.url.suffix";
 
-	public static final String CONTACT_US_SITE_ID = ServerConfigurationService.getString("contact.us.tool.site.id", "!contact-us");
+	public static final String CONTACT_US_SITE_ID = "contact.us.tool.site.id";
 
-	public static final String CONTACT_US_ORIGIN_SITE = ServerConfigurationService.getString("contact.us.origin.site", "contact.us.origin.site");
+	public static final String CONTACT_US_ORIGIN_SITE = "contact.us.origin.site";
+
+	public static final String CONTACT_US_URL_DEFAULT = "contact_us";
+
+	public static final String CONTACT_US_SITE_ID_DEFAULT = "!contact-us";
 
 	/**
 	 * Our log (commons).
@@ -595,8 +599,11 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 		// find the tool registered for this
 		ActiveTool tool = ActiveToolManager.getActiveTool(placement.getToolId());
 
-		if (req.getRequestURI().endsWith(CONTACT_US_URL_SUFFIX)){
-			ToolConfiguration contactUsTool = SiteService.findTool(CONTACT_US_SITE_ID);
+		// redirect to standalone Contact Us tool
+		String contactUsUrlSuffix = ServerConfigurationService.getString(CONTACT_US_URL_SUFFIX, CONTACT_US_URL_DEFAULT);
+		if (req.getRequestURI().endsWith(contactUsUrlSuffix)){
+			String contactUsSiteId = ServerConfigurationService.getString(CONTACT_US_SITE_ID, CONTACT_US_SITE_ID_DEFAULT);
+			ToolConfiguration contactUsTool = SiteService.findTool(contactUsSiteId);
 			if (contactUsTool!=null){
 				Site originSite = placement.getContainingPage().getContainingSite();
 				ToolSession ts = SessionManager.getCurrentSession().getToolSession(contactUsTool.getId());
