@@ -605,9 +605,8 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 			String contactUsSiteId = ServerConfigurationService.getString(CONTACT_US_SITE_ID, CONTACT_US_SITE_ID_DEFAULT);
 			ToolConfiguration contactUsTool = SiteService.findTool(contactUsSiteId);
 			if (contactUsTool!=null){
-				Site originSite = placement.getContainingPage().getContainingSite();
 				ToolSession ts = SessionManager.getCurrentSession().getToolSession(contactUsTool.getId());
-				ts.setAttribute(CONTACT_US_ORIGIN_SITE, originSite);
+				ts.setAttribute(CONTACT_US_ORIGIN_SITE, placement.getSiteId());
 				placement = contactUsTool;
 			}
 		}
