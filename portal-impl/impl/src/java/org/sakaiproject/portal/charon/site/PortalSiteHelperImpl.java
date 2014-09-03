@@ -1418,7 +1418,7 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 	}
 
 	private String getFeedbackUrl(String siteId) {
-		return ServerConfigurationService.getPortalUrl() + "/site/" + siteId  + "/page/" + SkinnableCharonPortal.CONTACT_US_URL_SUFFIX;
+		return ServerConfigurationService.getPortalUrl() + "/site/" + siteId  + "/page/" + ServerConfigurationService.getString(SkinnableCharonPortal.CONTACT_US_URL_SUFFIX, SkinnableCharonPortal.CONTACT_US_URL_DEFAULT);
 	}
 
 }
