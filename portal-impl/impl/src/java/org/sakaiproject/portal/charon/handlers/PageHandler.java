@@ -46,6 +46,7 @@ import org.sakaiproject.portal.api.PortalHandlerException;
 import org.sakaiproject.portal.api.PortalRenderContext;
 import org.sakaiproject.portal.api.StoredState;
 import org.sakaiproject.portal.api.Portal.LoginRoute;
+import org.sakaiproject.portal.charon.SkinnableCharonPortal;
 import org.sakaiproject.site.api.Site;
 import org.sakaiproject.site.api.SitePage;
 import org.sakaiproject.site.api.ToolConfiguration;
@@ -256,6 +257,12 @@ public class PageHandler extends BasePortalHandler
 
 			rcontext.put("pageTwoColumn", Boolean
 					.valueOf(page.getLayout() == SitePage.LAYOUT_DOUBLE_COL));
+
+			String contactUsUrlSuffix = ServerConfigurationService.getString(SkinnableCharonPortal.CONTACT_US_URL_SUFFIX, SkinnableCharonPortal.CONTACT_US_URL_DEFAULT);
+			if (req.getRequestURI().endsWith(contactUsUrlSuffix)){
+				rcontext.put("pageColumnLayout","col1");
+				rcontext.put("pageTwoColumn", false);
+			}
 
 			// do the second column if needed
 			if (page.getLayout() == SitePage.LAYOUT_DOUBLE_COL)
