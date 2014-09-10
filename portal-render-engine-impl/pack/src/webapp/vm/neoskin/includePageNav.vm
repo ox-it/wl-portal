@@ -63,7 +63,7 @@
 						</li>
 			#end
 			#if (${sitePages.pageNavShowFeedback})
-				<li>
+				<li class="${sitePages.contactUsToolClass}">
 					<a class="toolMenuLink" href="${sitePages.pageNavFeedbackUrl}" title="${rloader.sit_feedback_description}">
 						<span class="toolMenuIcon ${sitePages.feedbackMenuClass}"></span><span class="menuTitle">${rloader.sit_feedback}</span>
 					</a>
