@@ -218,6 +218,7 @@ public class PageHandler extends BasePortalHandler
 							(page.getLayout() == SitePage.LAYOUT_DOUBLE_COL) ? "col1of2"
 									: "col1");
 			Site site = null;
+			List<Map> pageColumn0Tools = new ArrayList<Map>();
 			try
 			{
 				site = SiteService.getSite(page.getSiteId());
@@ -229,7 +230,6 @@ public class PageHandler extends BasePortalHandler
 					log.trace("includePage unable to find site for page " + page.getId());
 			}
 			{
-				List<Map> toolList = new ArrayList<Map>();
 				List tools = page.getTools(0);
 				for (Iterator i = tools.iterator(); i.hasNext();)
 				{
@@ -249,10 +249,10 @@ public class PageHandler extends BasePortalHandler
 					if (m != null)
 					{
 						toolCount++;
-						toolList.add(m);
+						pageColumn0Tools.add(m);
 					}
 				}
-				rcontext.put("pageColumn0Tools", toolList);
+				rcontext.put("pageColumn0Tools", pageColumn0Tools);
 			}
 
 			rcontext.put("pageTwoColumn", Boolean
@@ -262,6 +262,7 @@ public class PageHandler extends BasePortalHandler
 			if (req.getRequestURI().endsWith(contactUsUrlSuffix)){
 				rcontext.put("pageColumnLayout","col1");
 				rcontext.put("pageTwoColumn", false);
+				rcontext.put("pageColumn0Tools", pageColumn0Tools.subList(0,1));
 			}
 
 			// do the second column if needed
