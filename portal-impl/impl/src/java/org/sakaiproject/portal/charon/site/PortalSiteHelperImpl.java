@@ -738,6 +738,13 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		}
 
 		theMap.put("pageNavTools", l);
+		String contactUsUrlSuffix = ServerConfigurationService.getString(SkinnableCharonPortal.CONTACT_US_URL_SUFFIX, SkinnableCharonPortal.CONTACT_US_URL_DEFAULT);
+		if (req.getRequestURI().endsWith(contactUsUrlSuffix)){
+			for (Map map : l) {
+				map.put("current", false);
+			}
+			theMap.put("contactUsToolClass", "selectedTool");
+		}
 		theMap.put("pageMaxIfSingle", ServerConfigurationService.getBoolean(
 				"portal.experimental.maximizesinglepage", false));
 		theMap.put("pageNavToolsCount", Integer.valueOf(l.size()));
