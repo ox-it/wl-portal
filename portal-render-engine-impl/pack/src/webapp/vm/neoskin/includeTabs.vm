@@ -121,25 +121,12 @@
 								</li>
 							#end
 							#if ($relatedLinks)
-							<h1 class="skip">${rloader.sit_quick_links}</h1>
-							<li id="quicklinks" class="nav-selected nav-menu">
-								<a href="javascript:;" title="Quick links">
-									<span role="menuitem" tabindex="-1">${rloader.sit_quick_links}</span>
-								</a>
-								<ul class="nav-submenu subnav" role="menu">
-									#foreach($relatedLink in $relatedLinks)
-										<li class="submenuitem">
-											<span>
-												<a role="menuitem" href="$relatedLink.url" title="$relatedLink.title" target="_blank">
-													<span class="toolMenuIcon icon-sakai-iframe"> </span>
-													$relatedLink.name
-												</a>
-											</span>
-										</li>
-									#end
-								</ul>
-								<span class="drop" tabindex="-1"></span>
-							</li>
+								<h1 class="skip">${rloader.sit_quick_links}</h1>
+								<li id="quicklinks" class="more-tab nav-selected nav-menu">
+									<a href="javascript:;" onclick="return dhtml_view_quicklinks();" title="${rloader.sit_quick_links}" aria-haspopup="true">
+										<span>${rloader.sit_quick_links}</span>
+									</a>
+								</li>
 							#end
 						</ul>
 					</div> <!-- /personalSites -->
@@ -155,9 +142,36 @@
 				</div>
 				#end
 
+#if ($relatedLinks)
+	<div id="selectQuickLinks" style="display:none">
+		<div id="otherSiteSearch">
+			<label for="txtSearch">${rloader.sit_quick_links}</label>
+		</div>
+		<ul id="otherSitesMenu">
+			<li id="otherSiteCloseW">
+				<a href="#" onclick="closeQuickLinksDrawer()" title="${rloader.sit_othersitesclose}"><span>X</span><span class="skip">${rloader.sit_othersitesclose}</span></a>
+			</li>
+		</ul>
+		#if ($useDHTMLMore)
+			<div id="otherQuickLinksCategorWrap">
+				<ul class="otherQuickLinksCategorList">
+					#foreach( $relatedLink in $relatedLinks)
+						<li>
+							<a role="menuitem" href="$relatedLink.url" title="$relatedLink.title" target="_blank">
+								<span id="quickLinksIcon" class="toolMenuIcon icon-sakai-iframe"></span>
+								<span class="quickLinksText">$relatedLink.name</span>
+							</a>
+						</li>
+					#end
+				</ul>
+			</div>
+		#end
+	</div>
+#end
+
 #if ($tabsSites.tabsMoreSitesShow)
 	<div id="selectSite" style="display:none">
-		<div id="otherSiteSearch"> 
+		<div id="otherSiteSearch">
 			<label for="txtSearch">${rloader.sit_search}</label> <input type="text" id="txtSearch" name="txtSearch" maxlength="50" />
 			<a id="imgSearch" href="#" style="display:none"><img src="${pageSkinRepo}/${pageSkin}/images/cancel.png" alt="${rloader.sit_search_cancel}" title="${rloader.sit_search_cancel}" /></a>
 			<span id="noSearchResults" style="display:none">${rloader.sit_search_none}</span>
@@ -214,10 +228,10 @@
      			<ul id="otherSiteList" role="navigation">
 					#foreach( $site in $tabsSites.tabsMoreSites )
 						<li><a href="${site.siteUrl}" title="${site.fullTitle}" id="${site.siteId}" class="moreSitesLink"><span class="fullTitle">${site.siteTitle}</span></a><a href="javascript:;" id="${site.siteId}" class="toolMenus" tabindex="-1">&nbsp;<span class="skip">Tools</span></a></li>
-					#end	
+					#end
       			</ul>
 			</div>
-		#end	
+		#end
 	</div>
 #end
 <div class="clear"></div>

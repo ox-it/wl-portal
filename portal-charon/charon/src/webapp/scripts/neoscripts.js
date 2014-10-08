@@ -744,3 +744,36 @@ $(function() {
     });
 });
 
+
+/* dhtml_view_quicklinks
+ * displays the Quick Links div
+ * note the technique of recasting the function after initalization
+ */
+var dhtml_view_quicklinks = function(){
+    jQuery('#selectQuickLinks').appendTo('#linkNav').addClass('dhtml_more_tabs'); // move the selectQuickLinks in the DOM
+    jQuery('.more-tab').position();
+
+    // then recast the function to the post initialized state which will run from then on
+    dhtml_view_quicklinks = function(){
+        if (jQuery('#selectQuickLinks').css('display') == 'none') {
+            jQuery('div#selectQuickLinks div').show();
+            jQuery('div#selectQuickLinks').slideDown('fast', function(){
+                if(jQuery('div#otherQuickLinksCategorWrap').height() > 300){
+                    $('div#otherQuickLinksCategorWrap').height(300).css({overflow:"auto"});
+                }
+            });
+            createDHTMLMask(dhtml_view_quicklinks);
+        }
+    }
+    // finally run the inner function, first time through
+    dhtml_view_quicklinks();
+}
+
+function closeQuickLinksDrawer() {
+    jQuery('div#selectQuickLinks div').hide();
+    jQuery('div#selectQuickLinks').slideUp('fast'); // hide the box
+    removeDHTMLMask();
+    jQuery('#otherSiteTools').remove();
+    jQuery('.moreSitesLink').unbind('keydown');
+    jQuery('.more-tab a').focus();
+}
