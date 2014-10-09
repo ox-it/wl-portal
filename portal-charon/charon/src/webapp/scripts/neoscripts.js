@@ -773,7 +773,4 @@ function closeQuickLinksDrawer() {
     jQuery('div#selectQuickLinks div').hide();
     jQuery('div#selectQuickLinks').slideUp('fast'); // hide the box
     removeDHTMLMask();
-    jQuery('#otherSiteTools').remove();
-    jQuery('.moreSitesLink').unbind('keydown');
-    jQuery('.more-tab a').focus();
 }
