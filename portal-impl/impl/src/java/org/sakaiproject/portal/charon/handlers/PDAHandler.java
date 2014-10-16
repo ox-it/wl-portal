@@ -285,7 +285,8 @@ public class PDAHandler extends SiteHandler
 					// Does the tool allow us to buffer?
 					allowBuffer = allowBufferContent(req, siteTool);
 
-					if ( allowBuffer || siteTool.getToolId().equals("sakai.iframe.site") ) {
+					if ( allowBuffer || siteTool.getToolId().equals("sakai.iframe.site")
+							|| siteTool.getToolId().equals("sakai.iframe")) {
 						toolContextPath = req.getContextPath() + req.getServletPath() + Web.makePath(parts, 1, 5);
 						toolPathInfo = Web.makePath(parts, 5, parts.length);
 
