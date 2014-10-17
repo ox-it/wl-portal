@@ -1863,12 +1863,14 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 			// for the main login/out link
 			String logInOutUrl = Web.serverUrl(req);
 			String message = null;
+			String loginTitle = null;
 			String image1 = null;
 
 			// for a possible second link
 			String logInOutUrl2 = null;
 			String logInOutUrl2Pda = null;
 			String message2 = null;
+			String loginTitle2 = null;
 			String image2 = null;
 			
 			// The related links
@@ -1911,10 +1913,13 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 
 					logInOutUrl = logInOutUrl + returnPath;
 					
-					// check for a login text override
+					// check for a login text/title override
 					message = StringUtils.trimToNull(ServerConfigurationService
 							.getString("login.text"));
 					if (message == null) message = rloader.getString("log.login");
+					loginTitle = StringUtils.trimToNull(ServerConfigurationService
+							.getString("login.text.title"));
+					if (loginTitle == null) loginTitle = message;
 
 					// check for an image for the login
 					image1 = StringUtils.trimToNull(ServerConfigurationService
@@ -1924,10 +1929,14 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 					if (Boolean.TRUE.toString().equalsIgnoreCase(
 							ServerConfigurationService.getString("xlogin.enabled")))
 					{
-						// get the text and image as configured
+						// get the text title and image as configured
 						message2 = StringUtils.trimToNull(ServerConfigurationService
 								.getString("xlogin.text"));
 						if (message2 == null) message2 = rloader.getString("log.xlogin");
+						loginTitle2 = StringUtils.trimToNull(ServerConfigurationService
+								.getString("xlogin.text.title"));
+						if (loginTitle2 == null) loginTitle2 = message2;
+
 						image2 = StringUtils.trimToNull(ServerConfigurationService
 								.getString("xlogin.icon"));
 						logInOutUrl2 = ServerConfigurationService.getString("portalPath") + "/xlogin" + returnPath;
@@ -1957,6 +1966,9 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 				message = StringUtils.trimToNull(ServerConfigurationService
 						.getString("logout.text"));
 				if (message == null) message = rloader.getString("sit_log");
+				loginTitle = StringUtils.trimToNull(ServerConfigurationService
+						.getString("logout.text.title"));
+				if (loginTitle == null) loginTitle = rloader.getString("sit_log_title");
 
 				// check for an image for the logout
 				image1 = StringUtils.trimToNull(ServerConfigurationService
@@ -1979,6 +1991,7 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 
 				rcontext.put("loginLogInOutUrl", logInOutUrl);
 				rcontext.put("loginMessage", message);
+				rcontext.put("loginTitle", loginTitle);
 				rcontext.put("loginImage1", image1);
 				rcontext.put("loginHasImage1", Boolean.valueOf(image1 != null));
 				rcontext.put("loginLogInOutUrl2", logInOutUrl2);
@@ -1986,6 +1999,7 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 				rcontext.put("loginHasLogInOutUrl2", Boolean
 						.valueOf(logInOutUrl2 != null));
 				rcontext.put("loginMessage2", message2);
+				rcontext.put("loginTitle2", loginTitle2);
 				rcontext.put("loginImage2", image2);
 				rcontext.put("loginHasImage2", Boolean.valueOf(image2 != null));
 				// put out the links version
