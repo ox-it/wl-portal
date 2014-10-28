@@ -76,13 +76,13 @@
 
 						#if (${loginHasLogInOutUrl2})
 							#if (${loginHasImage2}) 
-							<a href="${loginLogInOutUrl2}" title="${loginTitle2}" id="loginLink2" ><img src="${loginImage2}" alt="${loginMessage2}"/></a>
+							<a href="${loginLogInOutUrl2}" title="${loginTitle2}" id="loginLink2" ><img src="${loginImage2}" alt="${loginTitle2}"/></a>
 							#else
 							<a href="${loginLogInOutUrl2}" title="${loginTitle2}" id="loginLink2" >${loginMessage2}</a>
 							#end
 						#end
 						#if (${loginHasImage1})
-							<a href="${loginLogInOutUrl}" title="${loginTitle}" id="loginLink1" ><img src="${loginImage1}" alt="${loginMessage}"/></a>
+							<a href="${loginLogInOutUrl}" title="${loginTitle}" id="loginLink1" ><img src="${loginImage1}" alt="${loginTitle}"/></a>
 						#else
 							<a href="${loginLogInOutUrl}" title="${loginTitle}" id="loginLink1" >${loginMessage}</a>
 						#end
