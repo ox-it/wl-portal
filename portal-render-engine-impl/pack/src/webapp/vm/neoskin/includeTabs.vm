@@ -76,15 +76,15 @@
 
 						#if (${loginHasLogInOutUrl2})
 							#if (${loginHasImage2}) 
-							<a href="${loginLogInOutUrl2}" title="${loginMessage2}" id="loginLink2" ><img src="${loginImage2}" alt="${loginMessage2}"/></a>
+							<a href="${loginLogInOutUrl2}" title="${loginTitle2}" id="loginLink2" ><img src="${loginImage2}" alt="${loginTitle2}"/></a>
 							#else
-							<a href="${loginLogInOutUrl2}" title="${loginMessage2}" id="loginLink2" >${loginMessage2}</a>
+							<a href="${loginLogInOutUrl2}" title="${loginTitle2}" id="loginLink2" >${loginMessage2}</a>
 							#end
 						#end
 						#if (${loginHasImage1})
-							<a href="${loginLogInOutUrl}" title="${loginMessage}" id="loginLink1" ><img src="${loginImage1}" alt="${loginMessage}"/></a>
+							<a href="${loginLogInOutUrl}" title="${loginTitle}" id="loginLink1" ><img src="${loginImage1}" alt="${loginTitle}"/></a>
 						#else
-							<a href="${loginLogInOutUrl}" title="${loginMessage}" id="loginLink1" >${loginMessage}</a>
+							<a href="${loginLogInOutUrl}" title="${loginTitle}" id="loginLink1" >${loginMessage}</a>
 						#end
 						</div>
 					#else
@@ -115,7 +115,7 @@
 							#end
 							#if ($tabsSites.tabsMoreSitesShow)
 								<li class="more-tab nav-selected">
-									<a href="javascript:;" onclick="return dhtml_view_sites();" title="${rloader.sit_more}" aria-haspopup="true">
+									<a href="javascript:;" onclick="return dhtml_view_sites();" title="${rloader.sit_more_title}" aria-haspopup="true">
 										<span>${rloader.sit_more}</span>
 									</a>
 								</li>
@@ -123,7 +123,7 @@
 							#if ($relatedLinks)
 								<h1 class="skip">${rloader.sit_quick_links}</h1>
 								<li id="quicklinks" class="more-tab nav-selected nav-menu">
-									<a href="javascript:;" onclick="return dhtml_view_quicklinks();" title="${rloader.sit_quick_links}" aria-haspopup="true">
+									<a href="javascript:;" onclick="return dhtml_view_quicklinks();" title="${rloader.sit_quick_links_title}" aria-haspopup="true">
 										<span>${rloader.sit_quick_links}</span>
 									</a>
 								</li>
@@ -205,7 +205,7 @@
 				#foreach( $site in $tabsSites.tabsMoreTerms.get($termKey))
 					#if (${site.isMyWorkspace})
 						<li>
-							<a href="${site.siteUrl}" title="${rloader.sit_mywor}">
+							<a href="${site.siteUrl}" title="${rloader.sit_mywor_title}">
 								<span  class="fullTitle">${rloader.sit_mywor}</span>
 							</a>
 							<a href="#" id="${site.siteId}"class="toolMenus">&nbsp;<span class="skip">Tools</span></a>
