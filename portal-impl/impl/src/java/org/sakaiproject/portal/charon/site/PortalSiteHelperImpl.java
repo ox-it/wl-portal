@@ -45,6 +45,7 @@ import org.sakaiproject.authz.cover.SecurityService;
 import org.sakaiproject.component.cover.ComponentManager;
 import org.sakaiproject.component.cover.ServerConfigurationService;
 import org.sakaiproject.portal.charon.SkinnableCharonPortal;
+import org.sakaiproject.portal.util.URLUtils;
 import org.sakaiproject.tool.cover.SessionManager;
 import org.sakaiproject.user.cover.PreferencesService;
 import org.sakaiproject.user.api.Preferences;
@@ -758,6 +759,11 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		boolean showFeedback = ServerConfigurationService.getBoolean("display.contact.us.tool", true);
 		theMap.put("pageNavShowFeedback", showFeedback);
 		String feedbackUrl = getFeedbackUrl(effectiveSiteId);
+		String[] paths = req.getRequestURI().split("/");
+		String siteId = paths!=null && paths.length>=4 ? paths[3] : null;
+		if (siteId!=null){
+			feedbackUrl = URLUtils.addParameter(feedbackUrl, "siteId", siteId);
+		}
 		theMap.put("pageNavFeedbackUrl", feedbackUrl);
 		theMap.put("feedbackMenuClass", "icon-sakai-feedback");
 

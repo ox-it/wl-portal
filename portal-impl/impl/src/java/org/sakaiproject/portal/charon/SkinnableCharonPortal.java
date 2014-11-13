@@ -610,10 +610,6 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 				placement = contactUsTool;
 			}
 		}
-		else if (placement.getSiteId().equals("!error")){ // if site is unavailable then store siteId for Contact Us tool
-			Session s = SessionManager.getCurrentSession();
-			s.setAttribute(CONTACT_US_ORIGIN_SITE, req.getRequestURI().split("/")[3]);
-		}
 
 		if (tool == null)
 		{
