@@ -759,8 +759,14 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		boolean showFeedback = ServerConfigurationService.getBoolean("display.contact.us.tool", true);
 		theMap.put("pageNavShowFeedback", showFeedback);
 		String feedbackUrl = getFeedbackUrl(effectiveSiteId);
-		String[] paths = req.getRequestURI().split("/");
-		String siteId = paths!=null && paths.length>=4 ? paths[3] : null;
+		String siteId = null;
+		if (portalPrefix.equals("hierarchy")) {
+			siteId = site.getId();
+		}
+		else if (portalPrefix.equals("site")) {
+			String[] paths = req.getRequestURI().split("/");
+			siteId = paths!=null && paths.length>=4 ? paths[3] : null;
+		}
 		if (siteId!=null){
 			feedbackUrl = URLUtils.addParameter(feedbackUrl, "siteId", siteId);
 		}
