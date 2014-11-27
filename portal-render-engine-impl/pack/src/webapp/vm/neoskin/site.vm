@@ -170,6 +170,7 @@
 
 #parse("/vm/neoskin/includeAnalytics.vm")
 
+<script type="text/javascript" src="${pageScriptPath}cookieNotice.js"></script>
 	</div>
 </div>
 <!-- end includeSiteNav -->
