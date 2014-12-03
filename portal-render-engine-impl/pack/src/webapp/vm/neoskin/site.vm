@@ -170,6 +170,7 @@
 
 #parse("/vm/neoskin/includeAnalytics.vm")
 
+<script type="text/javascript" src="$!{portalCDNPath}/portal/scripts/cookieNotice.js$!{portalCDNQuery}"></script>
 	</div>
 </div>
 <!-- end includeSiteNav -->
