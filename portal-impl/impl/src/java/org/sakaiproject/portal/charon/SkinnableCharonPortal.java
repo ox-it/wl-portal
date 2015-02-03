@@ -1635,7 +1635,14 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 
 	public String getPortalPageUrl(ToolConfiguration p)
 	{
-		return "/site/"+ getSiteHelper().getSiteAlias(p.getSiteId())+ "/page/" + p.getPageId();
+		SitePage sitePage = p.getContainingPage();
+		String page = getSiteHelper().lookupPageToAlias(p.getSiteId(), sitePage);
+		if (page == null)
+		{
+			// Fall back to default of using the page Id.
+			page = p.getPageId();
+		}
+		return "/site/" + getSiteHelper().getSiteAlias(p.getSiteId()) + "/page/" + page;
 	}
 
 	/**
