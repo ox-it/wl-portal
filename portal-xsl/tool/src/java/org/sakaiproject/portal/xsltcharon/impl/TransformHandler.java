@@ -68,6 +68,11 @@ public class TransformHandler implements PortalHandler {
       return getBaseHandler().doPost(prepareParts(parts), req, res, session);
    }
 
+   @Override
+   public int getPriority() {
+      return 0; // Standard priority
+   }
+
    public PortalHandler getBaseHandler() {
       return baseHandler;
    }
