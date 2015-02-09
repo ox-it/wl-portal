@@ -262,7 +262,9 @@ public class PageHandler extends BasePortalHandler
 			if (req.getRequestURI().endsWith(contactUsUrlSuffix)){
 				rcontext.put("pageColumnLayout","col1");
 				rcontext.put("pageTwoColumn", false);
-				rcontext.put("pageColumn0Tools", pageColumn0Tools.subList(0,1));
+				if (!pageColumn0Tools.isEmpty()){
+					rcontext.put("pageColumn0Tools", pageColumn0Tools.subList(0,1));
+				}
 			}
 
 			// do the second column if needed
