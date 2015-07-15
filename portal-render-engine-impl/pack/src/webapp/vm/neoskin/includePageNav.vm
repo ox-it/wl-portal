@@ -25,7 +25,7 @@
 			#foreach( $page in $sitePages.pageNavTools )
 		  		#if (${page.current})
 						<li class="selectedTool">
-							<a class="toolMenuLink #if(${page.hidden})hidden#end" title="${page.pageTitle}" role="presentation" aria-disabled="true">
+							<a class="toolMenuLink #if(${page.hidden})hidden#end" href="${page.toolResetUrl}"  target="${page.toolPlacementIDJS}"  title="${page.pageTitle}" role="presentation" aria-disabled="true">
 								<span class="toolMenuIcon ${page.menuClass} $!{page.menuClassOverride} #if(${page.hidden})hidden#end"></span>
 								<span class="menuTitle">${page.pageTitle}</span>
 							</a>
