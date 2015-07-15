@@ -21,6 +21,22 @@
 
 package org.sakaiproject.portal.charon.site;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
+import java.util.Properties;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.sakaiproject.alias.api.Alias;
@@ -28,7 +44,17 @@ import org.sakaiproject.alias.cover.AliasService;
 import org.sakaiproject.authz.cover.SecurityService;
 import org.sakaiproject.component.cover.ComponentManager;
 import org.sakaiproject.component.cover.ServerConfigurationService;
-import org.sakaiproject.entity.api.*;
+import org.sakaiproject.portal.charon.SkinnableCharonPortal;
+import org.sakaiproject.portal.util.URLUtils;
+import org.sakaiproject.tool.cover.SessionManager;
+import org.sakaiproject.user.cover.PreferencesService;
+import org.sakaiproject.user.api.Preferences;
+import org.sakaiproject.entity.api.Entity;
+import org.sakaiproject.entity.api.EntityProducer;
+import org.sakaiproject.entity.api.EntitySummary;
+import org.sakaiproject.entity.api.Reference;
+import org.sakaiproject.entity.api.ResourceProperties;
+import org.sakaiproject.entity.api.Summary;
 import org.sakaiproject.entity.cover.EntityManager;
 import org.sakaiproject.exception.IdUnusedException;
 import org.sakaiproject.exception.PermissionException;
@@ -38,29 +64,24 @@ import org.sakaiproject.portal.api.PortalSiteHelper;
 import org.sakaiproject.portal.api.SiteView;
 import org.sakaiproject.portal.api.SiteView.View;
 import org.sakaiproject.portal.charon.PortalStringUtil;
-import org.sakaiproject.portal.charon.SkinnableCharonPortal;
 import org.sakaiproject.portal.util.ToolUtils;
-import org.sakaiproject.portal.util.URLUtils;
 import org.sakaiproject.site.api.Site;
 import org.sakaiproject.site.api.SitePage;
 import org.sakaiproject.site.api.ToolConfiguration;
 import org.sakaiproject.site.cover.SiteService;
 import org.sakaiproject.thread_local.cover.ThreadLocalManager;
 import org.sakaiproject.time.api.Time;
-import org.sakaiproject.tool.api.*;
-import org.sakaiproject.tool.cover.SessionManager;
-import org.sakaiproject.user.api.Preferences;
+import org.sakaiproject.tool.api.Placement;
+import org.sakaiproject.tool.api.Session;
+import org.sakaiproject.tool.api.Tool;
+import org.sakaiproject.tool.api.ToolManager;
 import org.sakaiproject.user.api.UserNotDefinedException;
 import org.sakaiproject.user.cover.PreferencesService;
 import org.sakaiproject.user.cover.UserDirectoryService;
 import org.sakaiproject.util.ArrayUtil;
 import org.sakaiproject.util.MapUtil;
 import org.sakaiproject.util.Web;
-
-import javax.servlet.http.HttpServletRequest;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.*;
+import org.sakaiproject.portal.util.ToolUtils;
 
 /**
  * @author ieb
@@ -680,7 +701,7 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 				if (tool != null)
 				{
 					String toolrefUrl = toolUrl + Web.escapeUrl(placement.getId());
-
+					
 					Map<String, Object> m = new HashMap<String, Object>();
 					m.put("isPage", Boolean.valueOf(false));
 					m.put("toolId", Web.escapeUrl(placement.getId()));
@@ -836,6 +857,7 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 
 
 		String pagePopupUrl = Web.returnUrl(req, "/page/");
+
 		//SAK-29660 - Refresh tool in the LHS page menu
 		String toolUrlPrefix = ServerConfigurationService.getToolUrl();
 		Iterator iPt = pTools.iterator();
@@ -848,8 +870,6 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 			resetActionUrl = PortalStringUtil.replaceFirst(pageResetUrl, toolUrlPrefix, toolUrlPrefix + "-reset");
 			placementId = placement.getId();
 		}
-
-		//ToolConfiguration placement = (ToolConfiguration) iPt.next();
 
 		m.put("isPage", Boolean.valueOf(true));
 		m.put("current", Boolean.valueOf(current));
