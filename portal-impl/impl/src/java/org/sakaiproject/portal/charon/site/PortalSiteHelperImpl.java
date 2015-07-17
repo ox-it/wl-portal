@@ -701,7 +701,7 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 				if (tool != null)
 				{
 					String toolrefUrl = toolUrl + Web.escapeUrl(placement.getId());
-					
+
 					Map<String, Object> m = new HashMap<String, Object>();
 					m.put("isPage", Boolean.valueOf(false));
 					m.put("toolId", Web.escapeUrl(placement.getId()));
@@ -869,6 +869,16 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 			String pageResetUrl = Web.serverUrl(req)+ ServerConfigurationService.getString("toolPath")+ "/"+placement.getId()+"/?panel=Main";
 			resetActionUrl = PortalStringUtil.replaceFirst(pageResetUrl, toolUrlPrefix, toolUrlPrefix + "-reset");
 			placementId = placement.getId();
+			if(ToolUtils.isPortletPlacement(placement)){
+				resetActionUrl = Web.serverUrl(req)
+						+ ServerConfigurationService.getString("portalPath")
+						+ URLUtils.getSafePathInfo(req) + "?sakai.state.reset=true";
+				m.put("toolPlacementIDJS", "_self");
+				m.put("isPortletPlacement", Boolean.TRUE);
+			}
+			else {
+				m.put("toolPlacementIDJS",Web.escapeJavascript("Main"+ placementId));
+			}
 		}
 
 		m.put("isPage", Boolean.valueOf(true));
@@ -883,7 +893,6 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		m.put("toolResetUrl",resetActionUrl);
 		m.put("toolpopup", Boolean.valueOf(source!=null));
 		m.put("toolpopupurl", source);
-		m.put("toolPlacementIDJS",Web.escapeJavascript("Main"+ placementId));
 
 		// TODO: Should have Web.escapeHtmlAttribute()
 		String description = desc.toString().replace("\"","&quot;");
