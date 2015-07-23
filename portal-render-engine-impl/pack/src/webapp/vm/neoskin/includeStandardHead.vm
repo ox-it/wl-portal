@@ -57,12 +57,12 @@
 <!--[if gte IE 5]><![if lt IE 7]>
     <link href="$!{portalCDNPath}/portal/styles/portalstyles-ie5.css$!{portalCDNQuery}" type="text/css" rel="stylesheet" media="all" />
 <![endif]><![endif]-->
-<link href="${pageSkinRepo}/${pageSkin}/portal.css" type="text/css" rel="stylesheet" media="all" />
+<link href="${pageSkinRepo}/${pageSkin}/portal.css$!{portalCDNQuery}" type="text/css" rel="stylesheet" media="all" />
 #if ( $neoChat && $loggedIn )
-<link href="${pageSkinRepo}/${pageSkin}/portalchat.css" type="text/css" rel="stylesheet" media="all" />
+<link href="${pageSkinRepo}/${pageSkin}/portalchat.css$!{portalCDNQuery}" type="text/css" rel="stylesheet" media="all" />
 #end
-<link href="${pageScriptPath}jquery/cluetip/1.2.10/css/jquery.cluetip.css" type="text/css" rel="stylesheet" media="all" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&amp;subset=latin,latin-ext">
+<link href="${pageScriptPath}jquery/cluetip/1.2.10/css/jquery.cluetip.css$!{portalCDNQuery}" type="text/css" rel="stylesheet" media="all" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css$!{portalCDNQuery}&amp;family=PT+Sans:400,700,400italic,700italic&amp;subset=latin,latin-ext">
 <link rel="shortcut icon" href="/favicon.ico">
 
 #if (! $currentPlacement && $isPDA )
@@ -140,7 +140,7 @@ ${sakai_html_head_js}
 <script type="text/javascript" src="$!{portalCDNPath}/portal/scripts/jquery.idle-timer.js$!{portalCDNQuery}"></script>
 <script type="text/javascript" src="$!{portalCDNPath}/portal/scripts/chat.js$!{portalCDNQuery}"></script>
 #if ( $neoChatVideo )
-<link href="${pageSkinRepo}/${pageSkin}/portalvideo.css" type="text/css" rel="stylesheet" media="all" />
+<link href="${pageSkinRepo}/${pageSkin}/portalvideo.css!{portalCDNQuery}" type="text/css" rel="stylesheet" media="all" />
 <script type="text/javascript">
 
     portal.chat.video.enabled = true;
@@ -190,7 +190,7 @@ document.write('<!-- jquery version '+jQuery.fn.jquery+' -->\n');
 </script>
 
 #if ( ${localCSS} )
-       <link href="${pageSkinRepo}/${localCSS}" type="text/css" rel="stylesheet" media="all" />
+       <link href="${pageSkinRepo}/${localCSS}$!{portalCDNQuery}" type="text/css" rel="stylesheet" media="all" />
 #end
 
 </head>
