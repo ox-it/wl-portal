@@ -158,7 +158,7 @@
 					#foreach( $relatedLink in $relatedLinks)
 						<li>
 							<a role="menuitem" href="$relatedLink.url" title="$relatedLink.title" target="_blank">
-								<span id="quickLinksIcon" class="toolMenuIcon icon-sakai-iframe"></span>
+								<span id="quickLinksIcon" class="toolMenuIcon icon-$relatedLink.icon quicklinks-icon-common "></span>
 								<span class="quickLinksText">$relatedLink.name</span>
 							</a>
 						</li>
