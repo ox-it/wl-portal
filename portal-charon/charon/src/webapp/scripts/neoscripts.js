@@ -764,6 +764,10 @@ var dhtml_view_quicklinks = function(){
             });
             createDHTMLMask(dhtml_view_quicklinks);
         }
+        else {
+            //hide the dropdown when clicked outside the div
+            closeQuickLinksDrawer();
+        }
     }
     // finally run the inner function, first time through
     dhtml_view_quicklinks();
