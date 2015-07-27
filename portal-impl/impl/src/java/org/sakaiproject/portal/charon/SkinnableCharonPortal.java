@@ -23,18 +23,7 @@ package org.sakaiproject.portal.charon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.TimeZone;
+import java.util.*;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletConfig;
@@ -2158,7 +2147,6 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 			}
 		}
 		this.relatedLinks = Collections.unmodifiableList(relatedLinks);
-
 		basicAuth = new BasicAuth();
 		basicAuth.init();
 
