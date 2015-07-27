@@ -2139,8 +2139,6 @@ public class SkinnableCharonPortal extends HttpServlet implements Portal
 				relatedLinks.add(Collections.unmodifiableMap(linkDetails));
 			}
 		}
-		//Sort the quick links by value of key 'name'
-		Collections.sort(relatedLinks,new QuickLinkComparator());
 		this.relatedLinks = Collections.unmodifiableList(relatedLinks);
 		basicAuth = new BasicAuth();
 		basicAuth.init();
