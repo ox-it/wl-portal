@@ -879,6 +879,9 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 			else {
 				m.put("toolPlacementIDJS",Web.escapeJavascript("Main"+ placementId));
 			}
+			if(placement.getPageOrder()==1) {
+				break;
+			}
 		}
 
 		m.put("isPage", Boolean.valueOf(true));
