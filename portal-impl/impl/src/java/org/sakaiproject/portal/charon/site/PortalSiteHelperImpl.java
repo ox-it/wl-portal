@@ -701,7 +701,7 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 				if (tool != null)
 				{
 					String toolrefUrl = toolUrl + Web.escapeUrl(placement.getId());
-
+				
 					Map<String, Object> m = new HashMap<String, Object>();
 					m.put("isPage", Boolean.valueOf(false));
 					m.put("toolId", Web.escapeUrl(placement.getId()));
@@ -858,7 +858,6 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 
 		String pagePopupUrl = Web.returnUrl(req, "/page/");
 
-		//SAK-29660 - Refresh tool in the LHS page menu
 		String toolUrlPrefix = ServerConfigurationService.getToolUrl();
 		Iterator iPt = pTools.iterator();
 		String resetActionUrl="";
@@ -878,9 +877,6 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 			}
 			else {
 				m.put("toolPlacementIDJS",Web.escapeJavascript("Main"+ placementId));
-			}
-			if(placement.getPageOrder()==1) {
-				break;
 			}
 		}
 
