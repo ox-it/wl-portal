@@ -63,6 +63,8 @@ import org.sakaiproject.portal.api.Portal;
 import org.sakaiproject.portal.api.PortalSiteHelper;
 import org.sakaiproject.portal.api.SiteView;
 import org.sakaiproject.portal.api.SiteView.View;
+import org.sakaiproject.portal.charon.PortalStringUtil;
+import org.sakaiproject.portal.util.ToolUtils;
 import org.sakaiproject.site.api.Site;
 import org.sakaiproject.site.api.SitePage;
 import org.sakaiproject.site.api.ToolConfiguration;
@@ -699,7 +701,7 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 				if (tool != null)
 				{
 					String toolrefUrl = toolUrl + Web.escapeUrl(placement.getId());
-					
+				
 					Map<String, Object> m = new HashMap<String, Object>();
 					m.put("isPage", Boolean.valueOf(false));
 					m.put("toolId", Web.escapeUrl(placement.getId()));
@@ -855,6 +857,29 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 
 
 		String pagePopupUrl = Web.returnUrl(req, "/page/");
+
+		String toolUrlPrefix = ServerConfigurationService.getToolUrl();
+		Iterator iPt = pTools.iterator();
+		String resetActionUrl="";
+		String placementId="";
+		ToolConfiguration placement=null;
+		while (iPt.hasNext()) {
+			placement = (ToolConfiguration) iPt.next();
+			String pageResetUrl = Web.serverUrl(req)+ ServerConfigurationService.getString("toolPath")+ "/"+placement.getId()+"/?panel=Main";
+			resetActionUrl = PortalStringUtil.replaceFirst(pageResetUrl, toolUrlPrefix, toolUrlPrefix + "-reset");
+			placementId = placement.getId();
+			if(ToolUtils.isPortletPlacement(placement)){
+				resetActionUrl = Web.serverUrl(req)
+						+ ServerConfigurationService.getString("portalPath")
+						+ URLUtils.getSafePathInfo(req) + "?sakai.state.reset=true";
+				m.put("toolPlacementIDJS", "_self");
+				m.put("isPortletPlacement", Boolean.TRUE);
+			}
+			else {
+				m.put("toolPlacementIDJS",Web.escapeJavascript("Main"+ placementId));
+			}
+		}
+
 		m.put("isPage", Boolean.valueOf(true));
 		m.put("current", Boolean.valueOf(current));
 		m.put("ispopup", Boolean.valueOf(p.isPopUp()));
@@ -864,6 +889,7 @@ public class PortalSiteHelperImpl implements PortalSiteHelper
 		m.put("pageId", Web.escapeUrl(p.getId()));
 		m.put("jsPageId", Web.escapeJavascript(p.getId()));
 		m.put("pageRefUrl", pagerefUrl);
+		m.put("toolResetUrl",resetActionUrl);
 		m.put("toolpopup", Boolean.valueOf(source!=null));
 		m.put("toolpopupurl", source);
 
