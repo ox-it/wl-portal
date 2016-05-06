@@ -77,7 +77,6 @@
 									return false" title="${rloader.sit_help}">
 								<span  class="toolMenuIcon ${sitePages.helpMenuClass}"> </span><span class="menuTitle">${rloader.sit_help}</span>
 								<span class="skip">${rloader.site_newwindow}</span> </a>
-								</a>
 						 </li>
 			#end
 #if (${sitePages.pageNavCanAddMoreTools}) 
@@ -87,7 +86,36 @@
 					<span class="menuTitle">${rloader.sit_addmoretools}</span>
 				</a>
 			</li>
-#end	
+#end
+						#if ($hierarchyPages.size() > 0)
+                                    <!-- Hierarchy Pages -->
+									#foreach( $page in $hierarchyPages )
+										#if (${page.current})
+                                            <li class="selectedTool">
+                                                <a class="toolMenuLink" title="${page.pageTitle}" role="presentation" aria-disabled="true">
+                                                	<span class="toolMenuIcon ${page.menuClass}"></span>
+                                                	<span class="menuTitle">${page.pageTitle}</span>
+												</a>
+                                            </li>
+										#else
+											#if (${page.ispopup})
+                                                <li>
+                                                    <a class="toolMenuLink" href="javascript:;" onclick="window.open('${page.pagePopupUrl}${page.pageId}','${page.jsPageTitle}','resizable=yes,toolbar=no,scrollbars=yes, width=800,height=600')">
+                                                        <span class="toolMenuIcon ${page.menuClass}"></span>
+                                                        <span class="menuTitle">${page.pageTitle}</span>
+                                                    </a>
+                                                </li>
+											#else
+                                                <li>
+                                                    <a class="toolMenuLink" href="${page.pageRefUrl}" >
+                                                        <span class="toolMenuIcon ${page.menuClass}"></span>
+                                                        <span class="menuTitle">${page.pageTitle}</span>
+                                                    </a>
+                                                </li>
+											#end
+										#end
+									#end
+						#end
 					</ul>
 				</div>
 			#if ($children.size() > 0)
@@ -107,38 +135,6 @@
 				             </a>
 				        </li>
 			#end
-					</ul>
-				</div>
-				#end
-				#if ($hierarchyPages.size() > 0)
-				<a id="tohierarchypages" class="skip" name="tohierarchypages"></a>
-				<h1 class="skip">${rloader.sit_hierarchypageshead}</h1>
-				<div id="toolMenu" class="toolMenu hierarchyPages">
-					<ul>
-					<!-- Hierarchy Pages -->
-					#foreach( $page in $hierarchyPages )
-						#if (${page.current})
-							<li class="selectedTool">
-								<span class="toolMenuLink toolMenu" >${page.pageTitle}</span>
-							</li>
-						#else
-							#if (${page.ispopup})
-								<li>
-									<a class="toolMenuLink" href="javascript:;" onclick="window.open('${page.pagePopupUrl}${page.pageId}','${page.jsPageTitle}','resizable=yes,toolbar=no,scrollbars=yes, width=800,height=600')">
-										<span class="toolMenuIcon ${page.menuClass}"></span>
-										<span class="menuTitle">${page.pageTitle}</span>
-									</a>
-								</li>
-							#else
-								<li>
-									<a class="toolMenuLink" href="${page.pageRefUrl}" >
-										<span class="toolMenuIcon $page.menuClass"></span>
-										<span class="menuTitle">${page.pageTitle}</span>
-									</a>
-								</li>
-							#end
-						#end
-					#end
 					</ul>
 				</div>
 				#end
